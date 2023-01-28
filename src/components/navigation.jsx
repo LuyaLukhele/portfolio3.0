@@ -12,22 +12,22 @@ import Home from './home'
 
 const links =[
     {
-        id:0,link: 'home', place: <Home/>
+        id:0,link: 'Home', place: <Home/>
     },
     {
-        id:1, link:'about', place: <About/>
+        id:1, link:'About', place: <About/>
     },
     {
-        id:2, link:'education', place: <Education/>
+        id:2, link:'Education', place: <Education/>
     },
     {
-        id:3, link:'skills', place: <Skills/>
+        id:3, link:'Skills', place: <Skills/>
     },
     {
-        id:4, link:'projects', place: <Projects/>
+        id:4, link:'Projects', place: <Projects/>
     },
     {
-        id:5, link:'contact', place: <Contact/>
+        id:5, link:'Contact', place: <Contact/>
     }
 ]
 
@@ -37,11 +37,11 @@ function Nav() {
   
 
     const Rightside = () => 
-    <div>
+    <div className='text-center'>
         <ul>
         {links.map(({id, link}) => (
-            <li key={id}>
-                <a onClick={() =>
+            <li className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2' key={id}>
+                <a className="text-6xl" onClick={() =>
                 setOpen(id)
                 }>{link}</a>
             </li>

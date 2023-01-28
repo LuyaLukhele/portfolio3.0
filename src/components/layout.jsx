@@ -1,16 +1,16 @@
 
-import '/home/luyanda/Documents/Personal/portfolio3.0/src/style/main.css'
+
 
 const SplitScreenLayout = ({
     children
 }) => {
     const [leftside, rightside] = children;
     return (
-        <div className="main-container">
-            <div>
+        <div className="display: flex m-20">
+            <div className="basis-2/3 pr-10">
                 {leftside}
             </div>
-            <div>
+            <div className="basis-1/3">
                 {rightside}
             </div>
         </div>
