@@ -39,8 +39,11 @@ function Nav() {
     const Rightside = () => 
     <div className='text-center'>
         <ul>
+        
         {links.map(({id, link}) => (
+            
             <li className='transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2' key={id}>
+            {/* <span>Icon</span> */}
                 <a className="text-6xl" onClick={() =>
                 setOpen(id)
                 }>{link}</a>
