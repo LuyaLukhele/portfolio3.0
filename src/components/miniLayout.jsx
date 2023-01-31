@@ -7,7 +7,7 @@ const MiniScreenLayout = ({
 }) => {
     const [top, botttom] = children;
     return (
-        <div>
+        <div className="bg-gray-50 border-solid border-2 rounded-sm border-stone-300">
             <div>
                 {top}
             </div>

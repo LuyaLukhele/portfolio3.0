@@ -3,8 +3,8 @@
 
 const education = () => {
     return (
-        <div className="bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
-            <ol>
+        <div className="h-3/5 overflow-auto bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
+            <ol className="mt-40">
             <li class="border-l-2 border-purple-600">
                 <div class="md:flex flex-start">
                 <div class="bg-purple-600 w-6 h-6 flex items-center justify-center rounded-full -ml-3.5">
@@ -14,10 +14,11 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">WeThinkCode</a>
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">15 / 12 / 2022</a>
+                    <a href="https://www.wethinkcode.co.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">WeThinkCode</a>
+                    <p class="font-medium text-orange-500 text-sm">01/09/2021 - 15/12/2022</p>
                     </div>
-                    <p class="text-gray-700 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula.</p>
+                    <p class="text-gray-700 mb-6">Software Developer training</p>
+                    <p class="text-gray-700 mb-6">Libero expedita explicabo eius fugiat quia aspernatur autem </p>
                 </div>
                 </div>
             </li>
@@ -30,10 +31,10 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">31 / 12 / 2020</a>
+                    <a href="https://www.dut.ac.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
+                    <p class="font-medium text-orange-500 text-sm">01/01/2017 - 31/12/2019</p>
                     </div>
-                    <p class="text-gray-700 mb-6">Libero expedita explicabo eius fugiat quia aspernatur autem laudantium error architecto recusandae natus sapiente sit nam eaque, consectetur porro molestiae ipsam an deleniti.</p>
+                    <p class="text-gray-700 mb-6">Advanced Diploma in Information & Communication Technology in Application Development (NQF 7)</p>
                 </div>
                 </div>
             </li>
@@ -46,10 +47,10 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
-                    <a href="#!" class="font-medium text-purple-600 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">31 / 12 / 2019</a>
+                    <a href="https://www.dut.ac.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
+                    <p class="font-medium text-orange-500 text-sm">01/01/2017 - 31/12/2019</p>
                     </div>
-                    <p class="text-gray-700 mb-6">Voluptatibus temporibus esse illum eum aspernatur, fugiat suscipit natus! Eum corporis illum nihil officiis tempore. Excepturi illo natus libero sit doloremque, laborum molestias rerum pariatur quam ipsam necessitatibus incidunt, explicabo.</p>
+                    <p class="text-gray-700 mb-6">Diploma in Information & Communication Technology in Application Development (NQF 6)</p>
                 </div>
                 </div>
             </li>
