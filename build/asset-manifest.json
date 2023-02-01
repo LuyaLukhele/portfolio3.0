@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d48e83a3.css",
+    "main.js": "/static/js/main.7064e07e.js",
+    "static/media/movie.png": "/static/media/movie.6a5e8f146d19890b0bd2.png",
+    "static/media/Luyanda Lukhele-min.png": "/static/media/Luyanda Lukhele-min.df67965963f764c627c1.png",
+    "static/media/Git.png": "/static/media/Git.9d256d9d14e310b973c1.png",
+    "static/media/portfolio1.png": "/static/media/portfolio1.4eb12ce99ab851a2aeac.png",
+    "index.html": "/index.html",
+    "main.d48e83a3.css.map": "/static/css/main.d48e83a3.css.map",
+    "main.7064e07e.js.map": "/static/js/main.7064e07e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d48e83a3.css",
+    "static/js/main.7064e07e.js"
+  ]
+}
