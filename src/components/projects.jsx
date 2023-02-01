@@ -37,9 +37,9 @@ function Projects() {
         {links.map(({id, link}) => (
             
             <li className={'p-2 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-100 hover: duration-300 ... border-solid border-2 rounded-sm border-orange-300 py-1 my-2'  + (open ===id ? ' bg-[#20354b] text-orange-500 hover:bg-white duration-300' : '')} key={id}>
-                <a className="text-xl cursor-pointer " onClick={() =>
+                <button className="text-xl cursor-pointer " onClick={() =>
                 setOpen(id)
-                }>{link}</a>
+                }>{link}</button>
             </li>
             ))}
         </ul>
@@ -101,8 +101,8 @@ function Movies(){
                 </div>
             </div>
             <div className='flex flex-row p-8 text-center'>
-                <a href='https://github.com/LuyaLukhele/movie-app' target='_blank' class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full text-orange-500 font-semibold bg-[#20354b] py-2 rounded-xl shadow-lg">View Code</a>
-                <a href='https://movie-luyapp.netlify.app' target='_blank' class=" transform hover:scale-105 transition duration-500 text-xl w-full text-orange-500 font-semibold bg-[#20354b] py-2 rounded-xl shadow-lg">Live View</a>
+                <a href='https://github.com/LuyaLukhele/movie-app' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full text-orange-500 font-semibold bg-[#20354b] py-2 rounded-xl shadow-lg">View Code</a>
+                <a href='https://movie-luyapp.netlify.app' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 text-xl w-full text-orange-500 font-semibold bg-[#20354b] py-2 rounded-xl shadow-lg">Live View</a>
             </div>
         </div>
         </div>
@@ -150,7 +150,7 @@ function Price(){
                 </div>
             </div>
             <div className='flex p-8 text-center'>
-            <a href='https://github.com/sibo-t/real-time-price-comparison' target='_blank' class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full text-orange-500 bg-[#20354b] py-2 rounded-xl shadow-lg">View Code</a>
+            <a href='https://github.com/sibo-t/real-time-price-comparison' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full text-orange-500 bg-[#20354b] py-2 rounded-xl shadow-lg">View Code</a>
             </div>
         </div>
         </div>
@@ -198,8 +198,8 @@ function Port(){
                 </div>
             </div>
             <div className='flex flex-row p-8 text-center'>
-            <a href='https://github.com/LuyaLukhele/LuyaLukhele.github.io' target='_blank' class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">View Code</a>
-                <a href='https://luyalukhele.github.io/' target='_blank' class=" transform hover:scale-105 transition duration-500 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">Live View</a>
+            <a href='https://github.com/LuyaLukhele/LuyaLukhele.github.io' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">View Code</a>
+                <a href='https://luyalukhele.github.io/' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">Live View</a>
             </div>
         </div>
         </div>
@@ -273,7 +273,7 @@ function Git(){
                 </div>
             </div>
             <div className='flex flex-row p-8 text-center'>
-            <a href='https://github.com/LuyaLukhele' target='_blank' class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">Open Github</a>
+            <a href='https://github.com/LuyaLukhele' target='_blank' rel="noreferrer" class=" transform hover:scale-105 transition duration-500 mr-5 text-xl w-full bg-[#20354b] text-orange-500 py-2 rounded-xl shadow-lg">Open Github</a>
             </div>
         </div>
         </div>

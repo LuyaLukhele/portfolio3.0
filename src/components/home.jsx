@@ -21,7 +21,7 @@ const home = () => {
             </div>
 
             <div className="mt-10">
-                <img className='hover:animate-pulse h-64 rounded-lg' src={Me}/>
+                <img alt="me" className='hover:animate-pulse h-64 rounded-lg' src={Me}/>
             </div>
         
         </div>

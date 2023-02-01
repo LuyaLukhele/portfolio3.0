@@ -45,9 +45,9 @@ function Nav() {
             
             <li className={'flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-200 hover:bg-white duration-300' : '')} key={id}>
             <span className='self-center'>{icon}</span>
-                <a className="text-6xl cursor-pointer self-center w-5/6" onClick={() =>
+                <button className="text-6xl cursor-pointer self-center w-5/6" onClick={() =>
                 ClickHandler(id)
-                }>{link}</a>
+                }>{link}</button>
             </li>
             
             ))}

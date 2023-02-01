@@ -14,7 +14,7 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="https://www.wethinkcode.co.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">WeThinkCode</a>
+                    <a href="https://www.wethinkcode.co.za/" target="_blank" rel="noreferrer" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">WeThinkCode</a>
                     <p class="font-medium text-orange-500 text-sm">01/09/2021 - 15/12/2022</p>
                     </div>
                     <p class="text-black-700 mb-6">Software Developer training</p>
@@ -39,7 +39,7 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="https://www.dut.ac.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
+                    <a href="https://www.dut.ac.za/" target="_blank" rel="noreferrer" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
                     <p class="font-medium text-orange-500 text-sm">01/01/2017 - 31/12/2019</p>
                     </div>
                     <p class="text-black-700 mb-6">Advanced Diploma in Information & Communication Technology in Application Development (NQF 7)</p>
@@ -55,7 +55,7 @@ const education = () => {
                 </div>
                 <div class="block p-6 rounded-lg shadow-lg bg-gray-100 max-w-md ml-6 mb-10">
                     <div class="flex justify-between mb-4">
-                    <a href="https://www.dut.ac.za/" target="_blank" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
+                    <a href="https://www.dut.ac.za/" target="_blank" rel="noreferrer" class="font-medium text-orange-500 hover:text-purple-700 focus:text-purple-800 duration-300 transition ease-in-out text-sm">Durban University of Technology</a>
                     <p class="font-medium text-orange-500 text-sm">01/01/2017 - 31/12/2019</p>
                     </div>
                     <p class="text-black-700 mb-6">Diploma in Information & Communication Technology in Application Development (NQF 6)</p>
