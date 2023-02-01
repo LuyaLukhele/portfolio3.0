@@ -29,7 +29,7 @@ const Contact = () => {
     };
     
     return (
-        <div className="bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
+        <div className=" overflow-auto bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
             <div className="max-w-screen-lg p-4 mx-auto flex flex-col justify-center w-full h-96">
                 
     
