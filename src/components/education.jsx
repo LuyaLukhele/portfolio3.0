@@ -4,7 +4,7 @@
 const education = () => {
     return (
         <div className="h-3/6 overflow-auto bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
-            <ol className="mt-60">
+            <ol className="sm:mt-60">
             <li class="border-l-2 border-purple-600">
                 <div class="md:flex flex-start">
                 <div class="bg-purple-600 w-6 h-6 flex items-center justify-center rounded-full -ml-3.5">

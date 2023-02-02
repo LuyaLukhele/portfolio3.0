@@ -29,14 +29,14 @@ const Contact = () => {
     };
     
     return (
-        <div className=" overflow-auto bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
+        <div className="h-screen sm:h-96 overflow-auto bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300"> 
             <div className="max-w-screen-lg p-4 mx-auto flex flex-col justify-center w-full h-96">
                 
     
-            <div className="grid sm:grid-cols-1 md:grid-cols-2 sm:px-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 sm:px-0">
                 
                 <form ref={form} onSubmit={sendEmail} 
-                className="max-w-xs m-20 rounded-sm">
+                className="max-w-xs sm:m-20 rounded-sm">
                 <label>Name</label>
                 <input type="text" name="user_name" placeholder="Your Name"
                     required className="mt-1

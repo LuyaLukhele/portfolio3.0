@@ -39,15 +39,15 @@ function Nav() {
 
     const Rightside = () => 
     <div className='text-center'>
-        <ul>
+        <ul className='flex flex-row justify-center sm:flex-col'>
         
         {links.map(({id, link, icon}) => (
             
-            <li className={'flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-200 hover:bg-white duration-300' : '')} key={id}>
-            <span className='self-center'>{icon}</span>
-                <button className="text-6xl cursor-pointer self-center w-5/6" onClick={() =>
+            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-200 hover:bg-white duration-300' : '')} key={id}>
+            
+                <button className="pr-2 sm:text-black sm:text-6xl flex flex-row cursor-pointer self-center w-1 sm:w-5/6" onClick={() =>
                 ClickHandler(id)
-                }>{link}</button>
+                }><span className='self-center' >{icon}</span>{link}</button>
             </li>
             
             ))}

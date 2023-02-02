@@ -32,7 +32,7 @@ function Projects() {
 
     const Top = () => 
     <div className='flex justify-center items-center text-center'>
-        <ul className='flex items-baseline space-x-4'>
+        <ul className='flex flex-wrap justify-center sm:items-baseline space-x-4'>
         
         {links.map(({id, link}) => (
             
@@ -65,7 +65,7 @@ function Movies(){
 
         <div class="mt-2 flex justify-center items-center">
         <div class="md:space-y-0">
-            <div class="p-10 flex flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
+            <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
             
                 <div class="pr-10 relative w-10/12">
                     <h3 class="mb-3 text-xl font-bold text-orange-500 font-semibold">Now Movies</h3>
@@ -114,7 +114,7 @@ function Price(){
 
         <div class="mt-2 flex justify-center items-center">
         <div class="md:space-y-0">
-            <div class="p-10 flex flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
+            <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
             
                 <div class="pr-10 relative w-10/12">
                     <h3 class="mb-3 text-xl font-bold text-orange-500">Price Comparison</h3>
@@ -162,7 +162,7 @@ function Port(){
 
         <div class="mt-2 flex justify-center items-center">
         <div class="md:space-y-0">
-            <div class="p-10 flex flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
+            <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
             
                 <div class="pr-10 relative w-10/12">
                     <h3 class="mb-3 text-xl font-bold text-orange-500">First Portfolio</h3>
@@ -211,7 +211,7 @@ function WhatUPlayin(){
 
         <div class="mt-2 flex justify-center items-center">
         <div class="md:space-y-0">
-            <div class="p-10 flex flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
+            <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
             
                 <div class="pr-10 relative w-10/12">
                     <h3 class="mb-3 text-xl font-bold text-orange-500">WhatUPlayin</h3>
@@ -261,7 +261,7 @@ function Git(){
 
         <div class="mt-2 flex justify-center items-center">
         <div class="md:space-y-0">
-            <div class="p-10 flex flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
+            <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
             
                 <div class="pr-10 relative w-10/12">
                     <h3 class="mb-3 text-xl font-bold text-orange-500">My Github</h3>

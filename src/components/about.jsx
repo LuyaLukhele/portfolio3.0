@@ -3,7 +3,7 @@
 const about = () => {
     return (
         <div className="overflow-auto h-1/3 bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300">
-            <div className=" mt-96 bg-white py-24 sm:py-32">
+            <div className=" sm:mt-96 bg-white py-24 sm:py-32">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
                 <div className="mx-auto max-w-2xl lg:text-center">
                 <h2 className="text-lg font-semibold leading-8 tracking-tight text-orange-500">Real apps made with passion</h2>
