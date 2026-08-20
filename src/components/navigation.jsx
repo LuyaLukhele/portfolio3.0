@@ -12,22 +12,22 @@ import Home from './home'
 
 const links =[
     {
-        id:0,link: 'Home', place: <Home/>, icon: homeIcon()
+        id:0,link: 'Home', place: () => <Home/>, icon: homeIcon()
     },
     {
-        id:1, link:'About', place: <About/>, icon: aboutIcon()
+        id:1, link:'About', place: (navigate) => <About onContactClick={() => navigate(5)}/>, icon: aboutIcon()
     },
     {
-        id:2, link:'Education', place: <Education/>, icon: eduIcon()
+        id:2, link:'Education', place: () => <Education/>, icon: eduIcon()
     },
     {
-        id:3, link:'Skills', place: <Skills/>, icon: skillIcon()
+        id:3, link:'Skills', place: () => <Skills/>, icon: skillIcon()
     },
     {
-        id:4, link:'Projects', place: <Projects/>, icon: projectIcon()
+        id:4, link:'Projects', place: () => <Projects/>, icon: projectIcon()
     },
     {
-        id:5, link:'Contact', place: <Contact/>, icon: cotactIcon()
+        id:5, link:'Contact', place: () => <Contact/>, icon: cotactIcon()
     }
 ]
 
@@ -37,19 +37,19 @@ function Nav() {
     
   
 
-    const Rightside = () => 
-    <div className='text-center'>
-        <ul className='flex flex-row justify-center sm:flex-col'>
-        
+    const Rightside = () =>
+    <div className='text-center sticky top-0 z-10 bg-white sm:top-20 sm:bg-transparent'>
+        <ul className='flex flex-row justify-center py-1 sm:py-0 sm:flex-col'>
+
         {links.map(({id, link, icon}) => (
-            
-            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-sm border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-200 hover:bg-white duration-300' : '')} key={id}>
-            
-                <button className="pr-2 sm:text-black sm:text-6xl flex flex-row cursor-pointer self-center w-1 sm:w-5/6" onClick={() =>
+
+            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-500 text-white border-orange-500 hover:bg-orange-400 duration-300' : '')} key={id}>
+
+                <button className={"sm:pr-2 sm:text-6xl flex flex-row justify-center cursor-pointer self-center w-full sm:w-5/6 " + (open === id ? 'text-white' : 'sm:text-black')} onClick={() =>
                 ClickHandler(id)
-                }><span className='self-center' >{icon}</span>{link}</button>
+                }><span className='self-center' >{icon}</span><span className='hidden sm:inline'>{link}</span></button>
             </li>
-            
+
             ))}
         </ul>
     </div>
@@ -62,7 +62,7 @@ function Nav() {
 
     var ss = links.find((l) => l.id === open)
 
-    const Leftside = () => ss.place;
+    const Leftside = () => ss.place(ClickHandler);
     return (
         <SplitScreenLayout>
             <Leftside/>
