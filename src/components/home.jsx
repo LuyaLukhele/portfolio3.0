@@ -1,6 +1,6 @@
 
 import Me from '../assets/Luyanda Lukhele-min.png'
-import Typed from 'react-typed';
+import { ReactTyped as Typed } from 'react-typed';
 
 
 const home = () => {
