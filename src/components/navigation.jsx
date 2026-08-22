@@ -43,9 +43,9 @@ function Nav() {
 
         {links.map(({id, link, icon}) => (
 
-            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 bg-orange-500 text-white border-orange-500 hover:bg-orange-400 duration-300' : '')} key={id}>
+            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 border-orange-200 hover:bg-orange-400 duration-300' : '')} style={open === id ? {backgroundColor: '#fed7aa'} : undefined} key={id}>
 
-                <button className={"sm:pr-2 sm:text-6xl flex flex-row justify-center cursor-pointer self-center w-full sm:w-5/6 " + (open === id ? 'text-white' : 'sm:text-black')} onClick={() =>
+                <button className={"sm:pr-2 sm:text-6xl flex flex-row justify-center cursor-pointer self-center w-full sm:w-5/6 " + (open === id ? 'text-black' : 'sm:text-black')} onClick={() =>
                 ClickHandler(id)
                 }><span className='self-center' >{icon}</span><span className='hidden sm:inline'>{link}</span></button>
             </li>
