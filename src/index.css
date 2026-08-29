@@ -1,18 +1,17 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
+html,
+body {
   margin: 0;
   min-height: 100%;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,8 +24,8 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family:
+    source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 /* Skills marquee */
@@ -62,12 +61,20 @@ code {
   animation: marquee-scroll-reverse 70s linear infinite;
 }
 
-.marquee-track-reverse:hover,
+@media (hover: hover) {
+  .marquee-track-reverse:hover {
+    animation-play-state: paused;
+  }
+
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+}
+
 .marquee-track-reverse:focus-within {
   animation-play-state: paused;
 }
 
-.marquee-track:hover,
 .marquee-track:focus-within {
   animation-play-state: paused;
 }
