@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
-import myImage from "../assets/Luyanda Lukhele-min.png"
+import myImage from "../assets/LuyandaShirtPP.avif"
 import Swal from "sweetalert2";
 
 const Contact = () => {

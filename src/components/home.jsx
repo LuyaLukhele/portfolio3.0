@@ -1,5 +1,5 @@
 
-import Me from '../assets/Luyanda Lukhele-min.png'
+import Me from '../assets/LuyandaShirtPP.avif'
 
 
 const home = () => {

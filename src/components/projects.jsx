@@ -1,10 +1,10 @@
 
 import React, { useState} from 'react';
 import MiniScreenLayout from "./miniLayout";
-import MoviePP from '../assets/movie.png';
-import Portfolio1PP from '../assets/portfolio1.png';
-import Github from '../assets/Git.png';
-import PriceChecker from '../assets/not-found.png';
+import MoviePP from '../assets/movie.avif';
+import Portfolio1PP from '../assets/portfolio1.avif';
+import Github from '../assets/Git.avif';
+import PriceChecker from '../assets/not-found.avif';
 
 
 const links =[
