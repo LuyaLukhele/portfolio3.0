@@ -1,11 +1,7 @@
-
-import Nav from "./components/navigation";
-
+import Nav from "./components/navigation"
 
 const App = () => {
-  return (
-    <Nav/>
-  );
+  return <Nav />
 }
 
-export default App;
+export default App

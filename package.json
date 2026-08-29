@@ -18,12 +18,17 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ]
   },
   "browserslist": {
@@ -40,7 +45,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.5.4",
+    "eslint-config-prettier": "9.1.2",
     "postcss": "^8.5.26",
+    "prettier": "3.9.6",
     "tailwindcss": "^3.4.19"
   }
 }
