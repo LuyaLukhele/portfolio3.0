@@ -73,7 +73,7 @@ const about = ({ onContactClick }) => {
       <div className="bg-white py-16 sm:py-24 w-full">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="max-w-2xl">
-            <p className="text-3xl font-bold tracking-tight text-gray-900 sm:text-2xl">
+            <p className="font-display text-3xl font-semibold tracking-tight text-gray-900 sm:text-2xl">
               I'm a Software Engineer who builds and maintains web applications
               across the{" "}
               <span className="text-orange-500 font-bold">front-end</span>,{" "}
@@ -87,18 +87,16 @@ const about = ({ onContactClick }) => {
               <div
                 key={title}
                 className={
-                  "bg-white border border-solid rounded-[10px] p-5" +
+                  "bg-white border border-solid border-brand-border rounded-[10px] p-5" +
                   (fullWidth ? " sm:col-span-2" : "")
                 }
-                style={{ borderColor: "#DADFE6" }}
               >
-                <div
-                  className="h-9 w-9 rounded-md flex items-center justify-center"
-                  style={{ backgroundColor: "#E8823E" }}
-                >
+                <div className="h-9 w-9 rounded-md flex items-center justify-center bg-brand-accent">
                   {icon}
                 </div>
-                <h3 className="mt-4 font-bold text-gray-900">{title}</h3>
+                <h3 className="mt-4 font-display font-semibold text-gray-900">
+                  {title}
+                </h3>
                 <p className="mt-2 text-base leading-7 text-gray-600">
                   {description}
                 </p>
@@ -106,12 +104,10 @@ const about = ({ onContactClick }) => {
             ))}
           </div>
 
-          <div
-            className="mt-8 rounded-[10px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            style={{ backgroundColor: "#1B1E24", padding: "22px 24px" }}
-          >
+          <div className="mt-8 rounded-[10px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-brand-navy py-[22px] px-6">
+
             <div>
-              <h3 className="text-white font-bold text-lg">
+              <h3 className="text-white font-display font-semibold text-lg">
                 Open to new opportunities
               </h3>
               <p className="mt-1 text-gray-400">
@@ -121,8 +117,7 @@ const about = ({ onContactClick }) => {
             </div>
             <button
               onClick={onContactClick}
-              className="shrink-0 rounded-full px-5 py-2.5 text-white font-semibold self-start sm:self-auto"
-              style={{ backgroundColor: "#E8823E" }}
+              className="shrink-0 rounded-full px-5 py-2.5 text-white font-semibold self-start sm:self-auto bg-brand-accent"
             >
               Get in touch
             </button>

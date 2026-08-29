@@ -7,25 +7,29 @@ const Contact = () => {
         href="https://www.linkedin.com/in/luyalukhele/"
         target="_blank"
         rel="noreferrer"
-        className="block w-60 mx-auto bg-[#20354b] rounded-2xl px-8 py-6 shadow-lg transform hover:scale-105 transition duration-500"
+        className="block w-60 mx-auto bg-brand-navy-light border border-solid border-brand-navy rounded-2xl px-8 py-6 transform hover:scale-105 transition duration-500"
       >
         <div className="mt-6 w-fit mx-auto">
-          <img src={myImage} class="rounded-full w-28 " alt="Luyanda lukhele" />
+          <img
+            src={myImage}
+            className="rounded-full w-28"
+            alt="Luyanda lukhele"
+          />
         </div>
 
         <div className="mt-8 ">
-          <span className="text-white font-bold text-2xl tracking-wide">
+          <span className="text-white font-display font-semibold text-2xl tracking-wide">
             Luyanda <br /> Lukhele
           </span>
         </div>
-        <p className="text-orange-500 font-semibold mt-2.5">LinkedIn</p>
+        <p className="text-orange-500 font-mono text-sm mt-2.5">LinkedIn</p>
       </a>
 
       <a
         href="mailto:lukheleluyanda@gmail.com"
         target="_blank"
         rel="noreferrer"
-        className="mt-4 flex items-center gap-3 bg-white rounded-full pl-4 pr-6 py-2 shadow-lg border border-gray-200 transform hover:scale-105 transition duration-500"
+        className="mt-4 flex items-center gap-3 bg-white rounded-full pl-4 pr-6 py-2 border border-solid border-brand-border transform hover:scale-105 transition duration-500"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +53,7 @@ const Contact = () => {
             d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"
           />
         </svg>
-        <span className="text-gray-700 font-semibold">
+        <span className="text-gray-700 font-mono text-sm">
           lukheleluyanda@gmail.com
         </span>
       </a>

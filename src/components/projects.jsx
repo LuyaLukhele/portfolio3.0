@@ -4,40 +4,66 @@ import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 import Github from "../assets/Git.avif"
 
+const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
+
 const techLogos = {
-  JavaScript:
-    "https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg",
-  JQuery: "https://www.vectorlogo.zone/logos/jquery/jquery-icon.svg",
-  HTML: "https://www.vectorlogo.zone/logos/w3_html5/w3_html5-icon.svg",
-  CSS: "https://www.vectorlogo.zone/logos/w3_css/w3_css-icon.svg",
-  Git: "https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg",
+  JavaScript: logo("javascript"),
+  JQuery: logo("jquery"),
+  HTML: logo("html5"),
+  CSS: logo("css3"),
+  Git: logo("git"),
+}
+
+function ProjectImage({ src, alt, className }) {
+  const [loaded, setLoaded] = useState(false)
+
+  return (
+    <div className="relative w-full">
+      <div
+        className={
+          "absolute inset-0 rounded-xl bg-gray-200 animate-pulse pointer-events-none transition-opacity duration-300" +
+          (loaded ? " opacity-0" : " opacity-100")
+        }
+      />
+      <img
+        src={src}
+        alt={alt}
+        className={
+          className +
+          " transition-opacity duration-500 ease-out" +
+          (loaded ? " opacity-100" : " opacity-0")
+        }
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  )
 }
 
 function TechBadge({ name }) {
   const logo = techLogos[name]
   return (
-    <div class="flex space-x-3 items-center">
+    <div className="flex space-x-3 items-center">
       {logo ? (
-        <img src={logo} alt={name} class="h-6 w-6 mb-1.5 object-contain" />
+        <img src={logo} alt={name} className="h-6 w-6 mb-1.5 object-contain" />
       ) : (
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-orange-500 mb-1.5"
+            className="h-6 w-6 text-orange-500 mb-1.5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
             />
           </svg>
         </span>
       )}
-      <p>{name}</p>
+      <p className="font-mono text-sm text-gray-600">{name}</p>
     </div>
   )
 }
@@ -71,13 +97,13 @@ function Projects() {
             className={
               "px-4 py-1 transition ease-in-out delay-150 hover:-translate-y-0.5 hover:bg-orange-100 duration-300 rounded-full" +
               (open === id
-                ? " bg-[#20354b] text-orange-500 hover:bg-[#20354b] duration-300"
+                ? " bg-brand-navy-light text-orange-500 hover:bg-brand-navy-light duration-300"
                 : "")
             }
             key={id}
           >
             <button
-              className="text-xl cursor-pointer "
+              className="font-mono text-base cursor-pointer"
               onClick={() => setOpen(id)}
             >
               {link}
@@ -107,11 +133,11 @@ export default Projects
 
 function Movies() {
   return (
-    <div class="mt-2 flex justify-center items-center">
-      <div class="md:space-y-0">
-        <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
-          <div class="pr-10 relative w-10/12">
-            <h3 class="mb-3 text-xl font-bold text-orange-500 font-semibold">
+    <div className="mt-2 flex justify-center items-center">
+      <div className="md:space-y-0">
+        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
+          <div className="pr-10 relative w-10/12">
+            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
               Now Movies
             </h3>
             <a
@@ -119,16 +145,16 @@ function Movies() {
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                class="w-full rounded-xl transform hover:scale-105 transition duration-500"
+              <ProjectImage
+                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
                 src={MoviePP}
                 alt="Now Movies live site"
               />
             </a>
           </div>
 
-          <div class="my-4">
-            <h1 class="mt-4 text-gray-800 text-xl font-bold cursor-pointer">
+          <div className="my-4">
+            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold cursor-pointer">
               Discover current movies and their ratings
             </h1>
             <TechBadge name="JavaScript" />
@@ -143,11 +169,11 @@ function Movies() {
 
 function Port() {
   return (
-    <div class="mt-2 flex justify-center items-center">
-      <div class="md:space-y-0">
-        <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
-          <div class="pr-10 relative w-10/12">
-            <h3 class="mb-3 text-xl font-bold text-orange-500">
+    <div className="mt-2 flex justify-center items-center">
+      <div className="md:space-y-0">
+        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
+          <div className="pr-10 relative w-10/12">
+            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
               First Portfolio
             </h3>
             <a
@@ -155,16 +181,16 @@ function Port() {
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                class="w-full rounded-xl transform hover:scale-105 transition duration-500"
+              <ProjectImage
+                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
                 src={Portfolio1PP}
                 alt="First Portfolio live site"
               />
             </a>
           </div>
 
-          <div class="my-4">
-            <h1 class="mt-4 text-gray-800 text-xl font-bold">
+          <div className="my-4">
+            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold">
               My first portfolio application
             </h1>
             <TechBadge name="JavaScript" />
@@ -179,26 +205,28 @@ function Port() {
 
 function Git() {
   return (
-    <div class="mt-2 flex justify-center items-center">
-      <div class="md:space-y-0">
-        <div class="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-xl shadow-lg">
-          <div class="pr-10 relative w-10/12">
-            <h3 class="mb-3 text-xl font-bold text-orange-500">My Github</h3>
+    <div className="mt-2 flex justify-center items-center">
+      <div className="md:space-y-0">
+        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
+          <div className="pr-10 relative w-10/12">
+            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
+              My Github
+            </h3>
             <a
               href="https://github.com/LuyaLukhele"
               target="_blank"
               rel="noreferrer"
             >
-              <img
-                class="w-full rounded-xl transform hover:scale-105 transition duration-500"
+              <ProjectImage
+                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
                 src={Github}
                 alt="Luyanda's GitHub profile"
               />
             </a>
           </div>
 
-          <div class="my-4">
-            <h1 class="mt-4 text-gray-800 text-xl font-bold">
+          <div className="my-4">
+            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold">
               This is the repository to all my personal projects.
             </h1>
           </div>

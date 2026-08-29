@@ -16,7 +16,7 @@ const links = [
   {
     id: 1,
     link: "About",
-    place: (navigate) => <About onContactClick={() => navigate(5)} />,
+    place: (navigate) => <About onContactClick={() => navigate(4)} />,
     icon: aboutIcon(),
   },
   {
@@ -50,10 +50,9 @@ function Nav() {
             className={
               "m-1 overflow-hidden w-10 lg:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2 lg:px-4" +
               (open === id
-                ? " animate-bounce-slow border-orange-200 hover:bg-orange-400 duration-300"
+                ? " animate-bounce-slow border-orange-200 bg-orange-200 hover:bg-orange-400 duration-300"
                 : "")
             }
-            style={open === id ? { backgroundColor: "#fed7aa" } : undefined}
             key={id}
           >
             <button
@@ -64,7 +63,9 @@ function Nav() {
               onClick={() => ClickHandler(id)}
             >
               <span className="self-center lg:hidden">{icon}</span>
-              <span className="hidden lg:inline">{link}</span>
+              <span className="hidden lg:inline font-display font-medium">
+                {link}
+              </span>
             </button>
           </li>
         ))}

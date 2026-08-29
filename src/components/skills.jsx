@@ -1,49 +1,18 @@
+const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
+
 const skillsList = [
-  {
-    name: "Python",
-    src: "https://www.vectorlogo.zone/logos/python/python-icon.svg",
-  },
-  {
-    name: "Django",
-    src: "https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg",
-  },
-  {
-    name: "React",
-    src: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg",
-  },
-  {
-    name: "JavaScript",
-    src: "https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg",
-  },
-  {
-    name: "PostgreSQL",
-    src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg",
-  },
-  {
-    name: "MySQL",
-    src: "https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg",
-  },
-  {
-    name: "Docker",
-    src: "https://www.vectorlogo.zone/logos/docker/docker-icon.svg",
-  },
-  {
-    name: "Git",
-    src: "https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg",
-  },
-  {
-    name: "AWS",
-    src: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg",
-  },
-  {
-    name: "VS Code",
-    src: "https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-icon.svg",
-  },
-  {
-    name: "npm",
-    src: "https://www.vectorlogo.zone/logos/npmjs/npmjs-icon.svg",
-  },
-  { name: "JSON", src: "https://www.vectorlogo.zone/logos/json/json-icon.svg" },
+  { name: "Python", src: logo("python") },
+  { name: "Django", src: logo("django") },
+  { name: "React", src: logo("reactjs") },
+  { name: "JavaScript", src: logo("javascript") },
+  { name: "PostgreSQL", src: logo("postgresql") },
+  { name: "MySQL", src: logo("mysql") },
+  { name: "Docker", src: logo("docker") },
+  { name: "Git", src: logo("git") },
+  { name: "AWS", src: logo("aws") },
+  { name: "VS Code", src: logo("vscode") },
+  { name: "npm", src: logo("npm") },
+  { name: "JSON", src: logo("json") },
 ]
 
 const Logo = ({ name, src }) => (
