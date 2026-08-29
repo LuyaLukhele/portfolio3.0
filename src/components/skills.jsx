@@ -1,122 +1,63 @@
+const skillsList = [
+    { name: "Python", src: "https://www.vectorlogo.zone/logos/python/python-icon.svg" },
+    { name: "Django", src: "https://www.vectorlogo.zone/logos/djangoproject/djangoproject-icon.svg" },
+    { name: "React", src: "https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg" },
+    { name: "JavaScript", src: "https://www.vectorlogo.zone/logos/javascript/javascript-icon.svg" },
+    { name: "PostgreSQL", src: "https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg" },
+    { name: "MySQL", src: "https://www.vectorlogo.zone/logos/mysql/mysql-icon.svg" },
+    { name: "Docker", src: "https://www.vectorlogo.zone/logos/docker/docker-icon.svg" },
+    { name: "Git", src: "https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" },
+    { name: "AWS", src: "https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" },
+    { name: "VS Code", src: "https://www.vectorlogo.zone/logos/visualstudio_code/visualstudio_code-icon.svg" },
+    { name: "npm", src: "https://www.vectorlogo.zone/logos/npmjs/npmjs-icon.svg" },
+    { name: "JSON", src: "https://www.vectorlogo.zone/logos/json/json-icon.svg" },
+]
 
+const Logo = ({ name, src }) => (
+    <div className="flex flex-col items-center justify-center gap-2 shrink-0 w-24 sm:w-28">
+        <img
+            src={src}
+            alt={name}
+            title={name}
+            loading="eager"
+            width={48}
+            height={48}
+            className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 hover:grayscale hover:opacity-70"
+        />
+        <span className="text-xs text-gray-500">{name}</span>
+    </div>
+)
 
+const half = Math.ceil(skillsList.length / 2)
+const rows = [skillsList.slice(0, half), skillsList.slice(half)]
 
-const skills = () => {
+const MarqueeRow = ({ items, reverse }) => (
+    <div
+        className="relative w-full max-w-5xl overflow-hidden"
+        style={{
+            maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        }}
+    >
+        <div className={"flex w-max gap-10 sm:gap-14 " + (reverse ? "marquee-track-reverse" : "marquee-track")}>
+            {[...items, ...items].map((skill, i) => (
+                <Logo key={`${skill.name}-${i}`} {...skill} />
+            ))}
+        </div>
+    </div>
+)
+
+const Skills = () => {
     return (
-        
-        <section class="overflow-auto text-gray-600 body-font bg-gray-50 h-3/5 flex justify-center items-center">
-        <div class="sm:mt-24 container px-5 py-24 mx-auto">
-            <div class="flex flex-wrap -m-4 text-center">
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class="animate-spin-slow bg-gradient-to-tr from-yellow-500 to-yellow-400 w-32 h-32  rounded-full shadow-2xl shadow-yellow-400 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="java" src="https://www.vectorlogo.zone/logos/java/java-ar21.svg"/></code>
-                    </div>
+        <section className="text-gray-600 body-font bg-gray-50 h-3/5 m-2 flex flex-col justify-center items-center overflow-hidden border-solid border-2 rounded-sm border-stone-300">
+            <div className="sm:mt-24 container px-5 py-24 mx-auto flex flex-col items-center">
+                <div className="w-full flex flex-col gap-8 sm:gap-10">
+                    <MarqueeRow items={rows[0]} />
+                    <MarqueeRow items={rows[1]} reverse />
                 </div>
-                </div>
-
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class=" animate-bounce-slow bg-gradient-to-tr from-orange-500 to-orange-400 w-32 h-32  rounded-full shadow-2xl shadow-orange-400 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="python" src="https://www.vectorlogo.zone/logos/python/python-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                
-                <div
-                    class=" animate-spin-slow bg-gradient-to-tr from-gray-900 to-gray-800 w-32 h-32  rounded-full shadow-2xl shadow-gray-400 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="react" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-
-                <div
-                    class=" animate-bounce-slow bg-gradient-to-tr from-white-500 to-white-400 w-32 h-32  rounded-full shadow-2xl shadow-[#304FFE] border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="sql" src="https://www.vectorlogo.zone/logos/mysql/mysql-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-                    <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class="animate-spin-slow bg-gradient-to-tr from-cyan-500 to-cyan-400 w-32 h-32  rounded-full shadow-2xl shadow-cyan-400 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="docker" src="https://www.vectorlogo.zone/logos/docker/docker-ar21.svg"/></code>  
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class=" animate-bounce-slow bg-gradient-to-tr from-yellow-300 to-yellow-200 w-32 h-32  rounded-full shadow-2xl shadow-yellow-400 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="js" src="https://www.vectorlogo.zone/logos/javascript/javascript-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class=" animate-spin-slow bg-gradient-to-tr from-red-500 to-red-400 w-32 h-32  rounded-full shadow-2xl shadow-red-500 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="npm" src="https://www.vectorlogo.zone/logos/npmjs/npmjs-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class=" animate-bounce-slow bg-gradient-to-tr from-purple-500 to-purple-400 w-32 h-32  rounded-full shadow-2xl shadow-purple-500 border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="jsom" src="https://www.vectorlogo.zone/logos/json/json-ar21.svg"/></code>
-                    </div>
-                </div>
-                </div>
-
-            </div>
-
-            <div class="p-4 sm:w-1/2 lg:w-1/3 w-full hover:scale-105 duration-500">
-                <div class=" flex items-center  justify-center p-4  rounded-lg bg-white shadow-indigo-50 shadow-md">
-                <div
-                    class=" animate-spin-slow bg-gradient-to-tr from-white-500 to-white-400 w-32 h-32  rounded-full shadow-2xl shadow-[#304FFE] border-white  border-dashed border-2  flex justify-center items-center ">
-                    <div>
-                    <code><img width="100%" alt="jquery" src="https://www.vectorlogo.zone/logos/jquery/jquery-ar21.svg"/></code>
-                    
-                    </div>
-                </div>
-                </div>
-
-            </div>
-            
-            </div>
             </div>
         </section>
     )
 }
-export default skills
+
+export default Skills

@@ -34,16 +34,16 @@ function Nav() {
   
 
     const Rightside = () =>
-    <div className='text-center sticky top-0 z-10 bg-white sm:top-20 sm:bg-transparent'>
-        <ul className='flex flex-row justify-center py-1 sm:py-0 sm:flex-col'>
+    <div className='text-center sticky top-0 z-10 bg-white lg:top-20 lg:bg-transparent'>
+        <ul className='flex flex-row justify-center py-1 lg:py-0 lg:flex-col'>
 
         {links.map(({id, link, icon}) => (
 
-            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 border-orange-200 hover:bg-orange-400 duration-300' : '')} style={open === id ? {backgroundColor: '#fed7aa'} : undefined} key={id}>
+            <li className={'m-1 overflow-hidden w-10 lg:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2 lg:px-4'  + (open ===id ? ' animate-bounce-slow border-orange-200 hover:bg-orange-400 duration-300' : '')} style={open === id ? {backgroundColor: '#fed7aa'} : undefined} key={id}>
 
-                <button className={"sm:pr-2 sm:text-6xl flex flex-row justify-center cursor-pointer self-center w-full sm:w-5/6 " + (open === id ? 'text-black' : 'sm:text-black')} onClick={() =>
+                <button className={"lg:text-6xl flex flex-row justify-center cursor-pointer self-center w-full " + (open === id ? 'text-black' : 'lg:text-black')} onClick={() =>
                 ClickHandler(id)
-                }><span className='self-center' >{icon}</span><span className='hidden sm:inline'>{link}</span></button>
+                }><span className='self-center lg:hidden' >{icon}</span><span className='hidden lg:inline'>{link}</span></button>
             </li>
 
             ))}
@@ -58,7 +58,7 @@ function Nav() {
 
     var ss = links.find((l) => l.id === open)
 
-    const Leftside = () => ss.place(ClickHandler);
+    const Leftside = () => <div key={open} className="page-transition">{ss.place(ClickHandler)}</div>;
     return (
         <SplitScreenLayout>
             <Leftside/>
