@@ -1,7 +1,6 @@
 
 import React, { useState} from 'react';
 import SplitScreenLayout from "./layout";
-import Education from "./education"
 import Contact from "./contact"
 import About from './about'
 import Projects from './projects'
@@ -18,16 +17,13 @@ const links =[
         id:1, link:'About', place: (navigate) => <About onContactClick={() => navigate(5)}/>, icon: aboutIcon()
     },
     {
-        id:2, link:'Education', place: () => <Education/>, icon: eduIcon()
+        id:2, link:'Skills', place: () => <Skills/>, icon: skillIcon()
     },
     {
-        id:3, link:'Skills', place: () => <Skills/>, icon: skillIcon()
+        id:3, link:'Projects', place: () => <Projects/>, icon: projectIcon()
     },
     {
-        id:4, link:'Projects', place: () => <Projects/>, icon: projectIcon()
-    },
-    {
-        id:5, link:'Contact', place: () => <Contact/>, icon: cotactIcon()
+        id:4, link:'Contact', place: () => <Contact/>, icon: cotactIcon()
     }
 ]
 
@@ -38,16 +34,16 @@ function Nav() {
   
 
     const Rightside = () =>
-    <div className='text-center sticky top-0 z-10 bg-white sm:top-20 sm:bg-transparent'>
-        <ul className='flex flex-row justify-center py-1 sm:py-0 sm:flex-col'>
+    <div className='text-center sticky top-0 z-10 bg-white lg:top-20 lg:bg-transparent'>
+        <ul className='flex flex-row justify-center py-1 lg:py-0 lg:flex-col'>
 
         {links.map(({id, link, icon}) => (
 
-            <li className={'m-1 overflow-hidden w-10 sm:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2'  + (open ===id ? ' animate-bounce-slow scale-110 border-orange-200 hover:bg-orange-400 duration-300' : '')} style={open === id ? {backgroundColor: '#fed7aa'} : undefined} key={id}>
+            <li className={'m-1 overflow-hidden w-10 lg:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2 lg:px-4'  + (open ===id ? ' animate-bounce-slow border-orange-200 hover:bg-orange-400 duration-300' : '')} style={open === id ? {backgroundColor: '#fed7aa'} : undefined} key={id}>
 
-                <button className={"sm:pr-2 sm:text-6xl flex flex-row justify-center cursor-pointer self-center w-full sm:w-5/6 " + (open === id ? 'text-black' : 'sm:text-black')} onClick={() =>
+                <button className={"lg:text-6xl flex flex-row justify-center cursor-pointer self-center w-full " + (open === id ? 'text-black' : 'lg:text-black')} onClick={() =>
                 ClickHandler(id)
-                }><span className='self-center' >{icon}</span><span className='hidden sm:inline'>{link}</span></button>
+                }><span className='self-center lg:hidden' >{icon}</span><span className='hidden lg:inline'>{link}</span></button>
             </li>
 
             ))}
@@ -62,7 +58,7 @@ function Nav() {
 
     var ss = links.find((l) => l.id === open)
 
-    const Leftside = () => ss.place(ClickHandler);
+    const Leftside = () => <div key={open} className="page-transition">{ss.place(ClickHandler)}</div>;
     return (
         <SplitScreenLayout>
             <Leftside/>
@@ -91,15 +87,6 @@ function aboutIcon(){
             <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
 
-
-    )
-}
-
-function eduIcon(){
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-        </svg>
 
     )
 }
