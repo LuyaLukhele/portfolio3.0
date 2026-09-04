@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react"
 import Projects from "./projects"
 
-test("renders all three projects as cards with their real links", () => {
+test("renders both projects as cards with their real links", () => {
   render(<Projects />)
 
   expect(
@@ -10,7 +10,6 @@ test("renders all three projects as cards with their real links", () => {
   expect(
     screen.getByRole("heading", { name: "Portfolio 1.0" })
   ).toBeInTheDocument()
-  expect(screen.getByRole("heading", { name: "GitHub" })).toBeInTheDocument()
 
   const links = screen.getAllByRole("link")
   const hrefs = links.map((a) => a.getAttribute("href"))
@@ -18,7 +17,6 @@ test("renders all three projects as cards with their real links", () => {
     expect.arrayContaining([
       "https://movie-luyapp.netlify.app",
       "https://luyalukhele.github.io/",
-      "https://github.com/LuyaLukhele",
     ])
   )
 })

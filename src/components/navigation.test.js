@@ -43,12 +43,18 @@ test("top bar border toggles on scroll", () => {
   expect(header.className).toMatch(/border-outline\b/)
 })
 
-test("copy-email icon in the top bar copies the real address", () => {
+test("copy-email icon in the top bar copies the real address and shows a toast", async () => {
   render(<Nav />)
+  const toast = screen.getByTestId("email-toast")
+  expect(toast.className).toMatch(/opacity-0/)
+
   fireEvent.click(screen.getByTitle("Copy email"))
+
   expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
     "lukheleluyanda@gmail.com"
   )
+  expect(await screen.findByText("Email copied to clipboard")).toBeInTheDocument()
+  expect(toast.className).toMatch(/opacity-100/)
 })
 
 test("LinkedIn quick link points at the real profile", () => {
@@ -56,5 +62,13 @@ test("LinkedIn quick link points at the real profile", () => {
   expect(screen.getByTitle("LinkedIn")).toHaveAttribute(
     "href",
     "https://www.linkedin.com/in/luyalukhele/"
+  )
+})
+
+test("GitHub quick link points at the real profile", () => {
+  render(<Nav />)
+  expect(screen.getByTitle("GitHub")).toHaveAttribute(
+    "href",
+    "https://github.com/LuyaLukhele"
   )
 })

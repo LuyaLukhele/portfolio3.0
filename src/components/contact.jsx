@@ -19,10 +19,7 @@ const Contact = () => {
   return (
     <div className="py-10">
       <div className="pb-6">
-        <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          {"// contact"}
-        </span>
-        <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
+        <h2 className="font-display text-2xl font-semibold text-ink-900">
           The best ways to reach me
         </h2>
       </div>

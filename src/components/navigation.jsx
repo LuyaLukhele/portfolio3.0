@@ -8,6 +8,7 @@ import { copyToClipboard } from "../utils/clipboard"
 
 const EMAIL = "lukheleluyanda@gmail.com"
 const LINKEDIN_URL = "https://www.linkedin.com/in/luyalukhele/"
+const GITHUB_URL = "https://github.com/LuyaLukhele"
 
 const links = [
   {
@@ -52,8 +53,16 @@ function Nav() {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
+  const [showToast, setShowToast] = useState(false)
+
   function navigate(id) {
     setOpen(id)
+  }
+
+  function handleCopyEmail() {
+    copyToClipboard(EMAIL)
+    setShowToast(true)
+    setTimeout(() => setShowToast(false), 2200)
   }
 
   const active = links.find((l) => l.id === open)
@@ -103,6 +112,15 @@ function Nav() {
           </span>
           <div className="flex gap-2">
             <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              title="GitHub"
+              className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container border border-outline text-ink-700 hover:bg-surface-container-high"
+            >
+              {githubIcon()}
+            </a>
+            <a
               href={LINKEDIN_URL}
               target="_blank"
               rel="noreferrer"
@@ -114,7 +132,7 @@ function Nav() {
             <button
               type="button"
               title="Copy email"
-              onClick={() => copyToClipboard(EMAIL)}
+              onClick={handleCopyEmail}
               className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container border border-outline text-ink-700 hover:bg-surface-container-high"
             >
               {mailIcon()}
@@ -122,7 +140,21 @@ function Nav() {
           </div>
         </header>
 
-        <main className="flex-1 px-5 lg:px-10 pb-24 lg:pb-10 max-w-3xl">
+        <div
+          role="status"
+          aria-live="polite"
+          data-testid="email-toast"
+          className={
+            "fixed top-20 right-5 lg:top-6 lg:right-10 z-50 bg-navy-10 text-white text-sm font-body px-4 py-3 rounded-xl shadow-e3 transition-all duration-200 " +
+            (showToast
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-2 pointer-events-none")
+          }
+        >
+          {showToast && "Email copied to clipboard"}
+        </div>
+
+        <main className="flex-1 px-5 lg:px-10 pb-24 lg:pb-10 w-full max-w-3xl mx-auto">
           <div key={open} className="page-transition">
             {active.place(navigate)}
           </div>
@@ -241,6 +273,23 @@ function cotactIcon() {
       <path
         strokeLinecap="round"
         d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25"
+      />
+    </svg>
+  )
+}
+
+function githubIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.31.679.921.679 1.856 0 1.339-.012 2.419-.012 2.749 0 .268.18.58.688.482A10.02 10.02 0 0022 12.017C22 6.484 17.523 2 12 2z"
       />
     </svg>
   )

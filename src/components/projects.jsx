@@ -1,7 +1,6 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
-import Github from "../assets/Git.avif"
 
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
@@ -15,16 +14,24 @@ const techLogos = {
 
 function ProjectImage({ src, alt, className }) {
   const [loaded, setLoaded] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    if (imgRef.current && imgRef.current.complete) {
+      setLoaded(true)
+    }
+  }, [])
 
   return (
     <div className="relative w-full">
       <div
         className={
-          "absolute inset-0 bg-surface-container-high animate-pulse pointer-events-none transition-opacity duration-300" +
-          (loaded ? " opacity-0" : " opacity-100")
+          "absolute inset-0 bg-surface-container-high pointer-events-none transition-opacity duration-300" +
+          (loaded ? " opacity-0" : " opacity-100 animate-pulse")
         }
       />
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
         className={
@@ -85,15 +92,6 @@ const projects = [
     linkLabel: "Live site",
     linkUrl: "https://luyalukhele.github.io/",
   },
-  {
-    title: "GitHub",
-    description: "This is the repository to all my personal projects.",
-    image: Github,
-    imageAlt: "Luyanda's GitHub profile",
-    tech: [],
-    linkLabel: "View profile",
-    linkUrl: "https://github.com/LuyaLukhele",
-  },
 ]
 
 function ProjectCard({
@@ -106,10 +104,10 @@ function ProjectCard({
   linkUrl,
 }) {
   return (
-    <article className="bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6">
-      <a href={linkUrl} target="_blank" rel="noreferrer">
+    <article className="group bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6 transition-shadow duration-300 [@media(hover:hover)]:hover:shadow-e2">
+      <a href={linkUrl} target="_blank" rel="noreferrer" className="block overflow-hidden">
         <ProjectImage
-          className="w-full h-48 object-cover"
+          className="w-full h-48 object-cover transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105"
           src={image}
           alt={imageAlt}
         />
@@ -143,10 +141,7 @@ function Projects() {
   return (
     <div className="py-10">
       <div className="pb-6">
-        <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          {"// projects"}
-        </span>
-        <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
+        <h2 className="font-display text-2xl font-semibold text-ink-900">
           A couple of things I've shipped
         </h2>
       </div>

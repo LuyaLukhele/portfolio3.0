@@ -24,7 +24,7 @@ const Logo = ({ name, src }) => (
       loading="eager"
       width={48}
       height={48}
-      className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 hover:grayscale hover:opacity-70"
+      className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 [@media(hover:hover)]:hover:grayscale [@media(hover:hover)]:hover:opacity-70"
     />
     <span className="text-xs text-gray-500">{name}</span>
   </div>
@@ -60,10 +60,7 @@ const Skills = () => {
   return (
     <section className="py-10">
       <div className="pb-6">
-        <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          {"// skills"}
-        </span>
-        <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
+        <h2 className="font-display text-2xl font-semibold text-ink-900">
           Languages, frameworks, and tools
         </h2>
       </div>

@@ -35,11 +35,11 @@ const Home = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="relative mx-auto lg:mx-0 shrink-0">
-        <div className="absolute -bottom-4 -right-4 h-64 w-full bg-orange-50 rounded-[28px_28px_28px_8px] -z-10" />
+      <div className="relative isolate mx-auto lg:mx-0 shrink-0 w-fit">
+        <div className="absolute inset-0 translate-x-6 translate-y-6 bg-orange-50 rounded-[28px_28px_28px_8px] -z-10" />
         <img
           alt="Luyanda Lukhele"
-          className="h-64 rounded-[28px_28px_28px_8px] shadow-e3 object-cover"
+          className="relative block h-64 aspect-[4/5] rounded-[28px_28px_28px_8px] shadow-e3 object-cover bg-surface-container-high"
           src={Me}
         />
       </div>
