@@ -92,6 +92,7 @@ function Nav() {
 
       <div className="flex flex-col min-h-screen">
         <header
+          data-testid="section-header"
           className={
             "flex items-center justify-between px-5 lg:px-10 py-4 sticky top-0 z-10 bg-surface/90 backdrop-blur-sm border-b transition-colors " +
             (scrolled ? "border-outline" : "border-transparent")

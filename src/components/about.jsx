@@ -1,3 +1,5 @@
+import Me from "../assets/LuyandaShirtPP.avif"
+
 const cards = [
   {
     title: "Back-End",
@@ -66,8 +68,6 @@ const cards = [
     fullWidth: true,
   },
 ]
-
-import Me from "../assets/LuyandaShirtPP.avif"
 
 const About = ({ onNavigate }) => {
   return (

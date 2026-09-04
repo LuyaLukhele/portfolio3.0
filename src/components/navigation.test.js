@@ -20,7 +20,9 @@ test("switches section and title when a rail item is clicked", () => {
   // button with the same accessible name; click the first (desktop rail).
   const [projectsButton] = screen.getAllByRole("button", { name: /projects/i })
   fireEvent.click(projectsButton)
-  expect(screen.getByText("// projects")).toBeInTheDocument()
+  // Both the header and the section component display "// projects"
+  // Check for the section-specific title that only appears in Projects
+  expect(screen.getByText("A couple of things I've shipped")).toBeInTheDocument()
 })
 
 test("marks the active rail item with aria-current", () => {
@@ -34,7 +36,7 @@ test("marks the active rail item with aria-current", () => {
 
 test("top bar border toggles on scroll", () => {
   render(<Nav />)
-  const header = screen.getByText("// home").closest("header")
+  const header = screen.getByTestId("section-header")
   expect(header.className).not.toMatch(/border-outline\b/)
   window.scrollY = 10
   fireEvent.scroll(window)

@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react"
+import { render, screen, fireEvent } from "@testing-library/react"
 import Contact from "./contact"
 
 beforeEach(() => {
@@ -15,9 +15,7 @@ test("tapping the email pill copies the real address and shows confirmation", as
   expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
     "lukheleluyanda@gmail.com"
   )
-  await waitFor(() =>
-    expect(screen.getByText("copied ✓")).toBeInTheDocument()
-  )
+  await screen.findByText("copied ✓")
   expect(screen.getByTestId("snackbar").className).toMatch(/opacity-100/)
 })
 
