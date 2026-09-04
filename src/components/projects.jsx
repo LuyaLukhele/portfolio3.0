@@ -1,5 +1,4 @@
-import React, { useState } from "react"
-import MiniScreenLayout from "./miniLayout"
+import { useState } from "react"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 import Github from "../assets/Git.avif"
@@ -21,7 +20,7 @@ function ProjectImage({ src, alt, className }) {
     <div className="relative w-full">
       <div
         className={
-          "absolute inset-0 rounded-xl bg-gray-200 animate-pulse pointer-events-none transition-opacity duration-300" +
+          "absolute inset-0 bg-gray-200 animate-pulse pointer-events-none transition-opacity duration-300" +
           (loaded ? " opacity-0" : " opacity-100")
         }
       />
@@ -40,198 +39,122 @@ function ProjectImage({ src, alt, className }) {
 }
 
 function TechBadge({ name }) {
-  const logo = techLogos[name]
+  const badgeLogo = techLogos[name]
   return (
-    <div className="flex space-x-3 items-center">
-      {logo ? (
-        <img src={logo} alt={name} className="h-6 w-6 mb-1.5 object-contain" />
+    <span className="inline-flex items-center gap-2 font-mono text-xs px-3 py-1.5 rounded-full bg-surface-container-high text-ink-700">
+      {badgeLogo ? (
+        <img src={badgeLogo} alt="" className="h-4 w-4 object-contain" />
       ) : (
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 text-orange-500 mb-1.5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
-            />
-          </svg>
-        </span>
+        <svg
+          className="h-4 w-4 text-orange-50"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+          />
+        </svg>
       )}
-      <p className="font-mono text-sm text-gray-600">{name}</p>
-    </div>
+      {name}
+    </span>
   )
 }
 
-const links = [
+const projects = [
   {
-    id: 0,
-    link: "Now Movies",
-    place: Movies(),
+    title: "Now Movies",
+    description: "Discover current movies and TV shows and their ratings.",
+    image: MoviePP,
+    imageAlt: "Now Movies live site",
+    tech: ["JavaScript", "JQuery", "MoviesDB API"],
+    linkLabel: "Live site",
+    linkUrl: "https://movie-luyapp.netlify.app",
   },
   {
-    id: 2,
-    link: "Portfolio 1.0",
-    place: Port(),
+    title: "Portfolio 1.0",
+    description:
+      "An earlier version of this portfolio, built to bring my projects, skills, and contact details together in one place.",
+    image: Portfolio1PP,
+    imageAlt: "First Portfolio live site",
+    tech: ["JavaScript", "HTML", "CSS"],
+    linkLabel: "Live site",
+    linkUrl: "https://luyalukhele.github.io/",
   },
   {
-    id: 4,
-    link: "GIT",
-    place: Git(),
+    title: "GitHub",
+    description: "This is the repository to all my personal projects.",
+    image: Github,
+    imageAlt: "Luyanda's GitHub profile",
+    tech: [],
+    linkLabel: "View profile",
+    linkUrl: "https://github.com/LuyaLukhele",
   },
 ]
 
-function Projects() {
-  const [open, setOpen] = useState(0)
-
-  const Top = () => (
-    <div className="flex justify-center items-center text-center mt-4">
-      <ul className="flex flex-wrap justify-center gap-2 p-2 border-solid border-2 rounded-full border-orange-300">
-        {links.map(({ id, link }) => (
-          <li
-            className={
-              "px-4 py-1 transition ease-in-out delay-150 hover:-translate-y-0.5 hover:bg-orange-100 duration-300 rounded-full" +
-              (open === id
-                ? " bg-brand-navy-light text-orange-500 hover:bg-brand-navy-light duration-300"
-                : "")
-            }
-            key={id}
-          >
-            <button
-              className="font-mono text-base cursor-pointer"
-              onClick={() => setOpen(id)}
-            >
-              {link}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
-
-  var ss = links.find((l) => l.id === open)
-
-  const Bottom = () => (
-    <div key={open} className="page-transition">
-      {ss.place}
-    </div>
-  )
+function ProjectCard({
+  title,
+  description,
+  image,
+  imageAlt,
+  tech,
+  linkLabel,
+  linkUrl,
+}) {
   return (
-    <MiniScreenLayout>
-      <Top />
-      <Bottom />
-    </MiniScreenLayout>
+    <article className="bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6">
+      <a href={linkUrl} target="_blank" rel="noreferrer">
+        <ProjectImage
+          className="w-full h-48 object-cover"
+          src={image}
+          alt={imageAlt}
+        />
+      </a>
+      <div className="p-7">
+        <h3 className="font-display text-xl font-semibold text-ink-900">
+          {title}
+        </h3>
+        <p className="mt-2 text-ink-700 leading-relaxed">{description}</p>
+        {tech.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {tech.map((name) => (
+              <TechBadge key={name} name={name} />
+            ))}
+          </div>
+        )}
+        <a
+          href={linkUrl}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-outline-strong hover:bg-surface-container-high transition"
+        >
+          {linkLabel}
+        </a>
+      </div>
+    </article>
+  )
+}
+
+function Projects() {
+  return (
+    <div className="py-10">
+      <div className="pb-6">
+        <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
+          // projects
+        </span>
+        <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
+          A couple of things I've shipped
+        </h2>
+      </div>
+      {projects.map((project) => (
+        <ProjectCard key={project.title} {...project} />
+      ))}
+    </div>
   )
 }
 
 export default Projects
-
-function Movies() {
-  return (
-    <div className="mt-2 flex justify-center items-center">
-      <div className="md:space-y-0">
-        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
-          <div className="pr-10 relative w-10/12">
-            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
-              Now Movies
-            </h3>
-            <a
-              href="https://movie-luyapp.netlify.app"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ProjectImage
-                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
-                src={MoviePP}
-                alt="Now Movies live site"
-              />
-            </a>
-          </div>
-
-          <div className="my-4">
-            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold cursor-pointer">
-              Discover current movies and their ratings
-            </h1>
-            <TechBadge name="JavaScript" />
-            <TechBadge name="JQuery" />
-            <TechBadge name="MoviesDB API" />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function Port() {
-  return (
-    <div className="mt-2 flex justify-center items-center">
-      <div className="md:space-y-0">
-        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
-          <div className="pr-10 relative w-10/12">
-            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
-              First Portfolio
-            </h3>
-            <a
-              href="https://luyalukhele.github.io/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ProjectImage
-                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
-                src={Portfolio1PP}
-                alt="First Portfolio live site"
-              />
-            </a>
-          </div>
-
-          <div className="my-4">
-            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold">
-              My first portfolio application
-            </h1>
-            <TechBadge name="JavaScript" />
-            <TechBadge name="HTML" />
-            <TechBadge name="CSS" />
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function Git() {
-  return (
-    <div className="mt-2 flex justify-center items-center">
-      <div className="md:space-y-0">
-        <div className="p-10 flex flex-col sm:flex-row max-w-2xl bg-white px-6 pb-2 rounded-[10px] border border-solid border-brand-border">
-          <div className="pr-10 relative w-10/12">
-            <h3 className="mb-3 text-xl font-display font-semibold text-orange-500">
-              My Github
-            </h3>
-            <a
-              href="https://github.com/LuyaLukhele"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ProjectImage
-                className="w-full rounded-xl transform hover:scale-105 transition duration-500"
-                src={Github}
-                alt="Luyanda's GitHub profile"
-              />
-            </a>
-          </div>
-
-          <div className="my-4">
-            <h1 className="mt-4 text-gray-800 text-xl font-display font-semibold">
-              This is the repository to all my personal projects.
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
