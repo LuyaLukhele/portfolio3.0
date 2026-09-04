@@ -67,64 +67,65 @@ const cards = [
   },
 ]
 
-const about = ({ onContactClick }) => {
+import Me from "../assets/LuyandaShirtPP.avif"
+
+const About = ({ onNavigate }) => {
   return (
-    <div className="bg-gray-50 m-2 p-8 flex flex-col justify-center items-center border-solid border-2 rounded-sm border-stone-300">
-      <div className="bg-white py-16 sm:py-24 w-full">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="max-w-2xl">
-            <p className="font-display text-3xl font-semibold tracking-tight text-gray-900 sm:text-2xl">
-              I'm a Software Engineer who builds and maintains web applications
-              across the{" "}
-              <span className="text-orange-500 font-bold">front-end</span>,{" "}
-              <span className="text-orange-500 font-bold">back-end</span>, APIs,
-              and databases.
-            </p>
-          </div>
+    <div className="py-10">
+      <div className="flex flex-col lg:flex-row gap-10 items-start">
+        <img
+          src={Me}
+          alt="Luyanda Lukhele"
+          className="w-32 h-32 lg:w-56 lg:h-56 rounded-3xl object-cover shadow-e2 shrink-0"
+        />
+        <p className="font-display text-2xl lg:text-3xl font-semibold text-ink-900">
+          I'm a Software Engineer who builds and maintains web applications
+          across the{" "}
+          <span className="text-orange-50 font-bold">front-end</span>,{" "}
+          <span className="text-orange-50 font-bold">back-end</span>, APIs,
+          and databases.
+        </p>
+      </div>
 
-          <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {cards.map(({ title, description, icon, fullWidth }) => (
-              <div
-                key={title}
-                className={
-                  "bg-white border border-solid border-brand-border rounded-[10px] p-5" +
-                  (fullWidth ? " sm:col-span-2" : "")
-                }
-              >
-                <div className="h-9 w-9 rounded-md flex items-center justify-center bg-brand-accent">
-                  {icon}
-                </div>
-                <h3 className="mt-4 font-display font-semibold text-gray-900">
-                  {title}
-                </h3>
-                <p className="mt-2 text-base leading-7 text-gray-600">
-                  {description}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-8 rounded-[10px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-brand-navy py-[22px] px-6">
-
-            <div>
-              <h3 className="text-white font-display font-semibold text-lg">
-                Open to new opportunities
-              </h3>
-              <p className="mt-1 text-gray-400">
-                If you're looking for a engineer with front-end and back-end
-                experience, I'd love to hear from you.
-              </p>
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {cards.map(({ title, description, icon, fullWidth }) => (
+          <div
+            key={title}
+            className={
+              "bg-surface-container border border-outline rounded-[20px] shadow-e1 p-5" +
+              (fullWidth ? " sm:col-span-2" : "")
+            }
+          >
+            <div className="h-9 w-9 rounded-md flex items-center justify-center bg-navy-20">
+              {icon}
             </div>
-            <button
-              onClick={onContactClick}
-              className="shrink-0 rounded-full px-5 py-2.5 text-white font-semibold self-start sm:self-auto bg-brand-accent"
-            >
-              Get in touch
-            </button>
+            <h3 className="mt-4 font-display font-semibold text-ink-900">
+              {title}
+            </h3>
+            <p className="mt-2 text-ink-700 leading-relaxed">{description}</p>
           </div>
+        ))}
+      </div>
+
+      <div className="mt-6 rounded-[20px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-navy-20 py-6 px-6">
+        <div>
+          <h3 className="text-white font-display font-semibold text-lg">
+            Open to new opportunities
+          </h3>
+          <p className="mt-1 text-white/70">
+            If you're looking for a engineer with front-end and back-end
+            experience, I'd love to hear from you.
+          </p>
         </div>
+        <button
+          type="button"
+          onClick={() => onNavigate(4)}
+          className="shrink-0 rounded-full px-5 py-2.5 text-white font-semibold self-start sm:self-auto bg-orange-50 hover:bg-orange-40 transition"
+        >
+          Get in touch
+        </button>
       </div>
     </div>
   )
 }
-export default about
+export default About
