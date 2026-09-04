@@ -24,7 +24,7 @@ const Logo = ({ name, src }) => (
       loading="eager"
       width={48}
       height={48}
-      className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 hover:grayscale hover:opacity-70"
+      className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 [@media(hover:hover)]:hover:grayscale [@media(hover:hover)]:hover:opacity-70"
     />
     <span className="text-xs text-gray-500">{name}</span>
   </div>
@@ -58,9 +58,14 @@ const MarqueeRow = ({ items, reverse }) => (
 
 const Skills = () => {
   return (
-    <section className="text-gray-600 body-font bg-gray-50 h-3/5 m-2 flex flex-col justify-center items-center overflow-hidden border-solid border-2 rounded-sm border-stone-300">
-      <div className="sm:mt-24 container px-5 py-24 mx-auto flex flex-col items-center">
-        <div className="w-full flex flex-col gap-8 sm:gap-10">
+    <section className="py-10">
+      <div className="pb-6">
+        <h2 className="font-display text-2xl font-semibold text-ink-900">
+          Languages, frameworks, and tools
+        </h2>
+      </div>
+      <div className="bg-surface-container border border-outline rounded-[20px] shadow-e1 py-10 flex flex-col items-center overflow-hidden">
+        <div className="w-full flex flex-col gap-8 sm:gap-10 px-5">
           <MarqueeRow items={rows[0]} />
           <MarqueeRow items={rows[1]} reverse />
         </div>

@@ -1,8 +1,13 @@
 import { render, screen } from "@testing-library/react"
 import App from "./App"
 
-test("renders learn react link", () => {
+test("renders the portfolio nav and defaults to the Home section", () => {
   render(<App />)
-  const linkElement = screen.getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+  expect(
+    screen.getByRole("navigation", { name: "Primary" })
+  ).toBeInTheDocument()
+  expect(screen.getByText("// home")).toBeInTheDocument()
+  expect(
+    screen.getByText(/I build software across the stack/i)
+  ).toBeInTheDocument()
 })
