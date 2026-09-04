@@ -58,9 +58,17 @@ const MarqueeRow = ({ items, reverse }) => (
 
 const Skills = () => {
   return (
-    <section className="text-gray-600 body-font bg-gray-50 h-3/5 m-2 flex flex-col justify-center items-center overflow-hidden border-solid border-2 rounded-sm border-stone-300">
-      <div className="sm:mt-24 container px-5 py-24 mx-auto flex flex-col items-center">
-        <div className="w-full flex flex-col gap-8 sm:gap-10">
+    <section className="py-10">
+      <div className="pb-6">
+        <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
+          // skills
+        </span>
+        <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
+          Languages, frameworks, and tools
+        </h2>
+      </div>
+      <div className="bg-surface-container border border-outline rounded-[20px] shadow-e1 py-10 flex flex-col items-center overflow-hidden">
+        <div className="w-full flex flex-col gap-8 sm:gap-10 px-5">
           <MarqueeRow items={rows[0]} />
           <MarqueeRow items={rows[1]} reverse />
         </div>
