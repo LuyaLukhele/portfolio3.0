@@ -20,7 +20,7 @@ function ProjectImage({ src, alt, className }) {
     <div className="relative w-full">
       <div
         className={
-          "absolute inset-0 bg-gray-200 animate-pulse pointer-events-none transition-opacity duration-300" +
+          "absolute inset-0 bg-surface-container-high animate-pulse pointer-events-none transition-opacity duration-300" +
           (loaded ? " opacity-0" : " opacity-100")
         }
       />
@@ -144,7 +144,7 @@ function Projects() {
     <div className="py-10">
       <div className="pb-6">
         <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          // projects
+          {"// projects"}
         </span>
         <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
           A couple of things I've shipped

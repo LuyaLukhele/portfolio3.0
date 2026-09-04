@@ -61,7 +61,7 @@ const Skills = () => {
     <section className="py-10">
       <div className="pb-6">
         <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          // skills
+          {"// skills"}
         </span>
         <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
           Languages, frameworks, and tools

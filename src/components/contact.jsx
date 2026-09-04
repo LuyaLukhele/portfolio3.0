@@ -20,7 +20,7 @@ const Contact = () => {
     <div className="py-10">
       <div className="pb-6">
         <span className="font-mono text-xs uppercase tracking-wide text-ink-500">
-          // contact
+          {"// contact"}
         </span>
         <h2 className="mt-1 font-display text-2xl font-semibold text-ink-900">
           The best ways to reach me
@@ -32,7 +32,7 @@ const Contact = () => {
           href="https://www.linkedin.com/in/luyalukhele/"
           target="_blank"
           rel="noreferrer"
-          className="block w-full max-w-sm rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,#16223A,#0B111E)] transform hover:scale-[1.02] transition duration-300"
+          className="block w-full max-w-sm rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,theme(colors.navy.20),theme(colors.navy.10))] transform hover:scale-[1.02] transition duration-300"
         >
           <img
             src={myImage}
@@ -89,13 +89,13 @@ const Contact = () => {
         aria-live="polite"
         data-testid="snackbar"
         className={
-          "fixed left-1/2 bottom-7 -translate-x-1/2 bg-navy-10 text-white text-sm font-body px-5 py-3.5 rounded-xl shadow-e3 transition-all duration-200 z-50 " +
+          "fixed left-1/2 bottom-20 lg:bottom-7 -translate-x-1/2 bg-navy-10 text-white text-sm font-body px-5 py-3.5 rounded-xl shadow-e3 transition-all duration-200 z-50 " +
           (showSnackbar
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-2 pointer-events-none")
         }
       >
-        Email copied to clipboard
+        {showSnackbar && "Email copied to clipboard"}
       </div>
     </div>
   )

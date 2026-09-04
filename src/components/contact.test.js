@@ -17,6 +17,9 @@ test("tapping the email pill copies the real address and shows confirmation", as
   )
   await screen.findByText("copied ✓")
   expect(screen.getByTestId("snackbar").className).toMatch(/opacity-100/)
+  expect(screen.getByTestId("snackbar")).toHaveTextContent(
+    "Email copied to clipboard"
+  )
 })
 
 test("LinkedIn card links to the real profile", () => {

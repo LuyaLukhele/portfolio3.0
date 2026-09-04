@@ -130,7 +130,7 @@ function Nav() {
       </div>
 
       <nav
-        aria-label="Primary"
+        aria-label="Primary (mobile)"
         className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-between px-3 py-2 bg-surface-container border-t border-outline z-10"
       >
         {links.map(({ id, link, icon }) => (
