@@ -1,32 +1,50 @@
 import Me from "../assets/LuyandaShirtPP.avif"
 
-const home = () => {
+const Home = ({ onNavigate }) => {
   return (
-    <div className="bg-gray-50 m-2 p-8 flex flex-col sm:flex-row-reverse sm:items-center sm:justify-center gap-10 border-solid border-2 rounded-sm border-stone-300">
-      <div className="relative mx-auto sm:mx-0 shrink-0">
-        <div className="absolute -bottom-4 -right-4 h-64 w-full bg-orange-500 rounded-lg -z-10"></div>
-        <img
-          alt="me"
-          className="hover:animate-pulse h-64 rounded-lg"
-          src={Me}
-        />
+    <div className="flex flex-col-reverse lg:flex-row lg:items-center gap-10 lg:gap-14 py-10">
+      <div>
+        <h1 className="font-display font-semibold tracking-tight text-4xl lg:text-5xl text-ink-900">
+          I build software across the stack
+          <span className="text-orange-50">.</span>
+        </h1>
+        <span className="mt-3 block font-mono text-orange-40 text-sm">
+          Software Engineer
+        </span>
+        <p className="mt-4 max-w-md text-ink-700 leading-relaxed">
+          I design and maintain web applications across the{" "}
+          <span className="text-orange-50 font-semibold">front-end</span>,{" "}
+          <span className="text-orange-50 font-semibold">back-end</span>,
+          APIs, and the databases that hold it together.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={() => onNavigate(3)}
+            className="rounded-full bg-navy-20 text-white font-semibold text-sm px-6 py-3 shadow-e1 hover:bg-navy-30 transition"
+          >
+            View projects
+          </button>
+          <button
+            type="button"
+            onClick={() => onNavigate(4)}
+            className="rounded-full border border-outline-strong text-ink-900 font-semibold text-sm px-6 py-3 hover:bg-surface-container-high transition"
+          >
+            Get in touch
+          </button>
+        </div>
       </div>
 
-      <div className="text-center sm:text-left">
-        <h1 className="font-display font-semibold tracking-tight text-4xl sm:text-5xl">
-          Luyanda Lukhele
-        </h1>
-        <h2 className="mt-2 font-mono text-lg sm:text-xl tracking-wide">
-          <span className='text-orange-500 relative inline-block after:content-[""] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-2 after:bg-orange-200 after:-z-10'>
-            Software Engineer
-          </span>
-        </h2>
-        <p className="mt-4 max-w-sm mx-auto sm:mx-0 text-gray-600">
-          Building web applications across the front-end, back-end, APIs, and
-          databases.
-        </p>
+      <div className="relative mx-auto lg:mx-0 shrink-0">
+        <div className="absolute -bottom-4 -right-4 h-64 w-full bg-orange-50 rounded-[28px_28px_28px_8px] -z-10" />
+        <img
+          alt="Luyanda Lukhele"
+          className="h-64 rounded-[28px_28px_28px_8px] shadow-e3 object-cover"
+          src={Me}
+        />
       </div>
     </div>
   )
 }
-export default home
+
+export default Home
