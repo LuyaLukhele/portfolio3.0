@@ -1,22 +1,25 @@
-import React, { useState } from "react"
-import SplitScreenLayout from "./layout"
+import { useEffect, useState } from "react"
 import Contact from "./contact"
 import About from "./about"
 import Projects from "./projects"
 import Skills from "./skills"
 import Home from "./home"
+import { copyToClipboard } from "../utils/clipboard"
+
+const EMAIL = "lukheleluyanda@gmail.com"
+const LINKEDIN_URL = "https://www.linkedin.com/in/luyalukhele/"
 
 const links = [
   {
     id: 0,
     link: "Home",
-    place: () => <Home />,
+    place: (navigate) => <Home onNavigate={navigate} />,
     icon: homeIcon(),
   },
   {
     id: 1,
     link: "About",
-    place: (navigate) => <About onContactClick={() => navigate(4)} />,
+    place: (navigate) => <About onNavigate={navigate} />,
     icon: aboutIcon(),
   },
   {
@@ -41,54 +44,108 @@ const links = [
 
 function Nav() {
   const [open, setOpen] = useState(0)
+  const [scrolled, setScrolled] = useState(false)
 
-  const Rightside = () => (
-    <div className="text-center sticky top-0 z-10 bg-white lg:top-20 lg:bg-transparent">
-      <ul className="flex flex-row justify-center py-1 lg:py-0 lg:flex-col">
-        {links.map(({ id, link, icon }) => (
-          <li
-            className={
-              "m-1 overflow-hidden w-10 lg:w-auto flex flex-row justify-center transition ease-in-out delay-150 hover:-translate-y-1 hover:bg-orange-500 hover:animate-pulse duration-300 ... border-solid border-2 rounded-full border-stone-300 py-1 my-2 lg:px-4" +
-              (open === id
-                ? " animate-bounce-slow border-orange-200 bg-orange-200 hover:bg-orange-400 duration-300"
-                : "")
-            }
-            key={id}
-          >
-            <button
-              className={
-                "lg:text-6xl flex flex-row justify-center cursor-pointer self-center w-full " +
-                (open === id ? "text-black" : "lg:text-black")
-              }
-              onClick={() => ClickHandler(id)}
-            >
-              <span className="self-center lg:hidden">{icon}</span>
-              <span className="hidden lg:inline font-display font-medium">
-                {link}
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4)
+    window.addEventListener("scroll", onScroll)
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
-  function ClickHandler(id) {
+  function navigate(id) {
     setOpen(id)
   }
 
-  var ss = links.find((l) => l.id === open)
+  const active = links.find((l) => l.id === open)
 
-  const Leftside = () => (
-    <div key={open} className="page-transition">
-      {ss.place(ClickHandler)}
-    </div>
-  )
+  const indicatorClasses = (id) =>
+    "flex items-center justify-center w-11 h-7 rounded-[14px] transition-colors duration-150 " +
+    (id === open
+      ? "bg-orange-90 text-orange-40"
+      : "text-ink-500 hover:bg-surface-container-high")
+
   return (
-    <SplitScreenLayout>
-      <Leftside />
-      <Rightside />
-    </SplitScreenLayout>
+    <div className="lg:grid lg:grid-cols-[88px_1fr] min-h-screen bg-surface font-body">
+      <nav
+        aria-label="Primary"
+        className="hidden lg:flex lg:flex-col lg:items-center lg:sticky lg:top-0 lg:h-screen bg-surface-container border-r border-outline py-7 gap-1.5"
+      >
+        <div className="w-10 h-10 rounded-xl bg-navy-20 text-orange-60 flex items-center justify-center font-mono text-[13px] font-medium mb-7">
+          LL
+        </div>
+        {links.map(({ id, link, icon }) => (
+          <button
+            key={id}
+            type="button"
+            aria-current={id === open ? "page" : undefined}
+            className={
+              "flex flex-col items-center gap-1 w-14 py-2 font-body text-[11px] font-medium " +
+              (id === open ? "text-ink-900" : "text-ink-500")
+            }
+            onClick={() => navigate(id)}
+          >
+            <span className={indicatorClasses(id)}>{icon}</span>
+            {link}
+          </button>
+        ))}
+      </nav>
+
+      <div className="flex flex-col min-h-screen">
+        <header
+          className={
+            "flex items-center justify-between px-5 lg:px-10 py-4 sticky top-0 z-10 bg-surface/90 backdrop-blur-sm border-b transition-colors " +
+            (scrolled ? "border-outline" : "border-transparent")
+          }
+        >
+          <span className="font-mono text-[13px] text-ink-500 tracking-wide">
+            {`// ${active.link.toLowerCase()}`}
+          </span>
+          <div className="flex gap-2">
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noreferrer"
+              title="LinkedIn"
+              className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container border border-outline text-ink-700 hover:bg-surface-container-high"
+            >
+              {linkedinIcon()}
+            </a>
+            <button
+              type="button"
+              title="Copy email"
+              onClick={() => copyToClipboard(EMAIL)}
+              className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container border border-outline text-ink-700 hover:bg-surface-container-high"
+            >
+              {mailIcon()}
+            </button>
+          </div>
+        </header>
+
+        <main className="flex-1 px-5 lg:px-10 pb-24 lg:pb-10 max-w-3xl">
+          <div key={open} className="page-transition">
+            {active.place(navigate)}
+          </div>
+        </main>
+      </div>
+
+      <nav
+        aria-label="Primary"
+        className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-between px-3 py-2 bg-surface-container border-t border-outline z-10"
+      >
+        {links.map(({ id, link, icon }) => (
+          <button
+            key={id}
+            type="button"
+            aria-label={link}
+            aria-current={id === open ? "page" : undefined}
+            className={indicatorClasses(id)}
+            onClick={() => navigate(id)}
+          >
+            {icon}
+          </button>
+        ))}
+      </nav>
+    </div>
   )
 }
 
@@ -102,7 +159,7 @@ function homeIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-5 h-5"
     >
       <path
         strokeLinecap="round"
@@ -121,7 +178,7 @@ function aboutIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-5 h-5"
     >
       <path
         strokeLinecap="round"
@@ -140,7 +197,7 @@ function skillIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-5 h-5"
     >
       <path
         strokeLinecap="round"
@@ -159,7 +216,7 @@ function projectIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-5 h-5"
     >
       <path
         strokeLinecap="round"
@@ -178,11 +235,49 @@ function cotactIcon() {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className="w-6 h-6"
+      className="w-5 h-5"
     >
       <path
         strokeLinecap="round"
         d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25"
+      />
+    </svg>
+  )
+}
+
+function linkedinIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z"
+      />
+    </svg>
+  )
+}
+
+function mailIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
       />
     </svg>
   )
