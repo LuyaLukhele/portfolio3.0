@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useLayoutEffect } from "react"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
-const techLogos = {
+export const techLogos = {
   JavaScript: logo("javascript"),
   JQuery: logo("jquery"),
   HTML: logo("html5"),
@@ -12,15 +12,18 @@ const techLogos = {
   Git: logo("git"),
 }
 
+const loadedImageSrcs = new Set()
+
 function ProjectImage({ src, alt, className }) {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(loadedImageSrcs.has(src))
   const imgRef = useRef(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (imgRef.current && imgRef.current.complete) {
+      loadedImageSrcs.add(src)
       setLoaded(true)
     }
-  }, [])
+  }, [src])
 
   return (
     <div className="relative w-full">
@@ -39,7 +42,10 @@ function ProjectImage({ src, alt, className }) {
           " transition-opacity duration-500 ease-out" +
           (loaded ? " opacity-100" : " opacity-0")
         }
-        onLoad={() => setLoaded(true)}
+        onLoad={() => {
+          loadedImageSrcs.add(src)
+          setLoaded(true)
+        }}
       />
     </div>
   )
@@ -72,7 +78,7 @@ function TechBadge({ name }) {
   )
 }
 
-const projects = [
+export const projects = [
   {
     title: "Now Movies",
     description: "Discover current movies and TV shows and their ratings.",
