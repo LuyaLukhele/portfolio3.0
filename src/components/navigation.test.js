@@ -9,9 +9,7 @@ beforeEach(() => {
 test("shows Home content by default with the home section title", () => {
   render(<Nav />)
   expect(screen.getByText("// home")).toBeInTheDocument()
-  expect(
-    screen.getByText(/I build software across the stack/i)
-  ).toBeInTheDocument()
+  expect(screen.getByText(/Software Engineer/i)).toBeInTheDocument()
 })
 
 test("switches section and title when a rail item is clicked", () => {

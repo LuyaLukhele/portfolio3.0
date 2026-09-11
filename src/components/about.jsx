@@ -1,5 +1,3 @@
-import Me from "../assets/LuyandaShirtPP.avif"
-
 const cards = [
   {
     title: "Back-End",
@@ -72,34 +70,19 @@ const cards = [
 const About = ({ onNavigate }) => {
   return (
     <div className="py-10">
-      <div className="flex flex-col lg:flex-row gap-10 items-start">
-        <img
-          src={Me}
-          alt="Luyanda Lukhele"
-          className="w-32 h-32 lg:w-56 lg:h-56 rounded-3xl object-cover shadow-e2 shrink-0"
-        />
-        <p className="font-display text-2xl lg:text-3xl font-semibold text-ink-900">
-          I'm a Software Engineer who builds and maintains web applications
-          across the{" "}
-          <span className="text-orange-50 font-bold">front-end</span>,{" "}
-          <span className="text-orange-50 font-bold">back-end</span>, APIs,
-          and databases.
-        </p>
-      </div>
-
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         {cards.map(({ title, description, icon, fullWidth }) => (
           <div
             key={title}
             className={
-              "bg-surface-container border border-outline rounded-[20px] shadow-e1 p-5" +
+              "bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6 transition-shadow duration-300 [@media(hover:hover)]:hover:shadow-e2" +
               (fullWidth ? " sm:col-span-2" : "")
             }
           >
-            <div className="h-9 w-9 rounded-md flex items-center justify-center bg-navy-20">
+            <div className="h-11 w-11 rounded-md flex items-center justify-center bg-orange-50">
               {icon}
             </div>
-            <h3 className="mt-4 font-display font-semibold text-ink-900">
+            <h3 className="mt-4 font-display text-lg font-semibold text-ink-900">
               {title}
             </h3>
             <p className="mt-2 text-ink-700 leading-relaxed">{description}</p>
@@ -107,7 +90,7 @@ const About = ({ onNavigate }) => {
         ))}
       </div>
 
-      <div className="mt-6 rounded-[20px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-navy-20 py-6 px-6">
+      <div className="mt-5 rounded-[20px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-navy-20 py-6 px-6">
         <div>
           <h3 className="text-white font-display font-semibold text-lg">
             Open to new opportunities

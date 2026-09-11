@@ -30,63 +30,6 @@ code {
     source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Skills marquee */
-@keyframes marquee-scroll {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes marquee-scroll-reverse {
-  from {
-    transform: translate3d(-50%, 0, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.marquee-track,
-.marquee-track-reverse {
-  will-change: transform;
-  backface-visibility: hidden;
-}
-
-.marquee-track {
-  animation: marquee-scroll 70s linear infinite;
-}
-
-.marquee-track-reverse {
-  animation: marquee-scroll-reverse 70s linear infinite;
-}
-
-@media (hover: hover) {
-  .marquee-track-reverse:hover {
-    animation-play-state: paused;
-  }
-
-  .marquee-track:hover {
-    animation-play-state: paused;
-  }
-}
-
-.marquee-track-reverse:focus-within {
-  animation-play-state: paused;
-}
-
-.marquee-track:focus-within {
-  animation-play-state: paused;
-}
-
-@media (max-width: 640px) {
-  .marquee-track {
-    animation-duration: 50s;
-  }
-}
-
 @keyframes page-fade-in {
   from {
     opacity: 0;
@@ -102,15 +45,7 @@ code {
   animation: page-fade-in 0.35s ease-out;
 }
 
-@media (max-width: 640px) {
-  .marquee-track-reverse {
-    animation-duration: 50s;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track,
-  .marquee-track-reverse,
   .page-transition {
     animation: none;
   }

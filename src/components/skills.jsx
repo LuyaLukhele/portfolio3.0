@@ -1,58 +1,54 @@
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
-const skillsList = [
-  { name: "Python", src: logo("python") },
-  { name: "Django", src: logo("django") },
-  { name: "React", src: logo("reactjs") },
-  { name: "JavaScript", src: logo("javascript") },
-  { name: "PostgreSQL", src: logo("postgresql") },
-  { name: "MySQL", src: logo("mysql") },
-  { name: "Docker", src: logo("docker") },
-  { name: "Git", src: logo("git") },
-  { name: "AWS", src: logo("aws") },
-  { name: "VS Code", src: logo("vscode") },
-  { name: "npm", src: logo("npm") },
-  { name: "JSON", src: logo("json") },
+const skillGroups = [
+  {
+    title: "Languages",
+    skills: [
+      { name: "Java", src: logo("java") },
+      { name: "Python", src: logo("python") },
+      { name: "JavaScript", src: logo("javascript") },
+    ],
+  },
+  {
+    title: "Frameworks & Libraries",
+    skills: [
+      { name: "Spring Boot", src: logo("springboot") },
+      { name: "Django", src: logo("django") },
+      { name: "React", src: logo("reactjs") },
+    ],
+  },
+  {
+    title: "Databases",
+    skills: [
+      { name: "PostgreSQL", src: logo("postgresql") },
+      { name: "MySQL", src: logo("mysql") },
+      { name: "SQL Server", src: logo("sqlserver") },
+    ],
+  },
+  {
+    title: "Tools & Platforms",
+    skills: [
+      { name: "Docker", src: logo("docker") },
+      { name: "Git", src: logo("git") },
+      { name: "AWS", src: logo("aws") },
+      { name: "Heroku", src: logo("heroku") },
+      { name: "VS Code", src: logo("vscode") },
+    ],
+  },
 ]
 
 const Logo = ({ name, src }) => (
-  <div className="flex flex-col items-center justify-center gap-2 shrink-0 w-24 sm:w-28">
+  <div className="flex items-center gap-2.5 bg-surface border border-outline rounded-full pl-2.5 pr-4 py-2">
     <img
       src={src}
       alt={name}
       title={name}
       loading="eager"
-      width={48}
-      height={48}
-      className="h-10 w-10 sm:h-12 sm:w-12 object-contain transition duration-300 [@media(hover:hover)]:hover:grayscale [@media(hover:hover)]:hover:opacity-70"
+      width={24}
+      height={24}
+      className="h-6 w-6 object-contain shrink-0"
     />
-    <span className="text-xs text-gray-500">{name}</span>
-  </div>
-)
-
-const half = Math.ceil(skillsList.length / 2)
-const rows = [skillsList.slice(0, half), skillsList.slice(half)]
-
-const MarqueeRow = ({ items, reverse }) => (
-  <div
-    className="relative w-full max-w-5xl overflow-hidden"
-    style={{
-      maskImage:
-        "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-      WebkitMaskImage:
-        "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-    }}
-  >
-    <div
-      className={
-        "flex w-max gap-10 sm:gap-14 " +
-        (reverse ? "marquee-track-reverse" : "marquee-track")
-      }
-    >
-      {[...items, ...items].map((skill, i) => (
-        <Logo key={`${skill.name}-${i}`} {...skill} />
-      ))}
-    </div>
+    <span className="text-sm font-medium text-ink-900">{name}</span>
   </div>
 )
 
@@ -64,11 +60,19 @@ const Skills = () => {
           Languages, frameworks, and tools
         </h2>
       </div>
-      <div className="bg-surface-container border border-outline rounded-[20px] shadow-e1 py-10 flex flex-col items-center overflow-hidden">
-        <div className="w-full flex flex-col gap-8 sm:gap-10 px-5">
-          <MarqueeRow items={rows[0]} />
-          <MarqueeRow items={rows[1]} reverse />
-        </div>
+      <div className="bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6 flex flex-col gap-6">
+        {skillGroups.map(({ title, skills }) => (
+          <div key={title}>
+            <h3 className="text-xs font-semibold uppercase tracking-wide text-ink-500">
+              {title}
+            </h3>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {skills.map((skill) => (
+                <Logo key={skill.name} {...skill} />
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   )
