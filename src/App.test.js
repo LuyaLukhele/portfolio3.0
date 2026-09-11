@@ -7,7 +7,5 @@ test("renders the portfolio nav and defaults to the Home section", () => {
     screen.getByRole("navigation", { name: "Primary" })
   ).toBeInTheDocument()
   expect(screen.getByText("// home")).toBeInTheDocument()
-  expect(
-    screen.getByText(/I build software across the stack/i)
-  ).toBeInTheDocument()
+  expect(screen.getByText(/Software Engineer/i)).toBeInTheDocument()
 })

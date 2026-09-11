@@ -3,12 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#171B24" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Luyanda Lukhele is a software engineer who builds and maintains web applications across the front-end, back-end, APIs, and databases."
     />
+    <meta
+      name="keywords"
+      content="Luyanda Lukhele, software engineer, full stack developer, React, Java, Spring Boot, Python, Django, portfolio"
+    />
+    <meta name="author" content="Luyanda Lukhele" />
+    <link rel="canonical" href="https://luyandalukhele.netlify.app/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Luyanda Lukhele" />
+    <meta property="og:title" content="Luyanda Lukhele — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Luyanda Lukhele is a software engineer who builds and maintains web applications across the front-end, back-end, APIs, and databases."
+    />
+    <meta property="og:url" content="https://luyandalukhele.netlify.app/" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Luyanda Lukhele — Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Luyanda Lukhele is a software engineer who builds and maintains web applications across the front-end, back-end, APIs, and databases."
+    />
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -30,11 +54,36 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Luyanda Lukhele</title>
+    <title>Luyanda Lukhele — Software Engineer</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Luyanda Lukhele",
+        "jobTitle": "Software Engineer",
+        "url": "https://luyandalukhele.netlify.app/",
+        "email": "mailto:lukheleluyanda@gmail.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/luyalukhele/",
+          "https://github.com/LuyaLukhele"
+        ]
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!--
+      Static form so Netlify's build-time bot can detect and provision
+      the "contact" form. The real form rendered by React (src/components/contact.jsx)
+      submits to it via fetch. See https://docs.netlify.com/manage/forms/setup/
+    -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

@@ -4,16 +4,51 @@ import { copyToClipboard } from "../utils/clipboard"
 
 const EMAIL = "lukheleluyanda@gmail.com"
 
+const encodeForm = (data) =>
+  Object.keys(data)
+    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+    .join("&")
+
 const Contact = () => {
   const [copyState, setCopyState] = useState("tap to copy")
   const [showSnackbar, setShowSnackbar] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState("")
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [formStatus, setFormStatus] = useState("idle")
+
+  const showToast = (message) => {
+    setSnackbarMessage(message)
+    setShowSnackbar(true)
+    setTimeout(() => setShowSnackbar(false), 2200)
+  }
 
   const handleCopy = async () => {
     await copyToClipboard(EMAIL)
     setCopyState("copied ✓")
-    setShowSnackbar(true)
+    showToast("Email copied to clipboard")
     setTimeout(() => setCopyState("tap to copy"), 2000)
-    setTimeout(() => setShowSnackbar(false), 2200)
+  }
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setFormStatus("submitting")
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeForm({ "form-name": "contact", ...formData }),
+      })
+      setFormStatus("success")
+      setFormData({ name: "", email: "", message: "" })
+      showToast("Message sent — thanks for reaching out")
+    } catch {
+      setFormStatus("error")
+      showToast("Something went wrong, please try again")
+    }
   }
 
   return (
@@ -24,33 +59,118 @@ const Contact = () => {
         </h2>
       </div>
 
-      <div className="flex flex-col items-start gap-5">
-        <a
-          href="https://www.linkedin.com/in/luyalukhele/"
-          target="_blank"
-          rel="noreferrer"
-          className="block w-full max-w-sm rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,theme(colors.navy.20),theme(colors.navy.10))] transform hover:scale-[1.02] transition duration-300"
-        >
-          <img
-            src={myImage}
-            className="rounded-2xl w-24 h-24 object-cover"
-            alt="Luyanda Lukhele"
-          />
-          <h3 className="mt-6 font-display font-semibold text-2xl">
-            Luyanda Lukhele
-          </h3>
-          <span className="mt-1 block font-mono text-orange-60 text-sm">
-            Software Engineer
-          </span>
-          <span className="mt-4 inline-block text-orange-60 font-semibold text-sm border-b border-orange-40 pb-0.5">
-            LinkedIn ↗
-          </span>
-        </a>
+      <div className="flex flex-col items-center gap-5">
+        <div className="w-full max-w-sm lg:max-w-[49rem] flex flex-col lg:flex-row lg:items-stretch gap-5">
+          <a
+            href="https://www.linkedin.com/in/luyalukhele/"
+            target="_blank"
+            rel="noreferrer"
+            className="block w-full max-w-sm lg:max-w-none lg:flex-1 rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,theme(colors.navy.20),theme(colors.navy.10))] transform hover:scale-[1.02] transition duration-300"
+          >
+            <img
+              src={myImage}
+              className="rounded-2xl w-24 h-24 object-cover"
+              alt="Luyanda Lukhele"
+            />
+            <h3 className="mt-6 font-display font-semibold text-2xl">
+              Luyanda Lukhele
+            </h3>
+            <span className="mt-1 block font-mono text-orange-60 text-sm">
+              Software Engineer
+            </span>
+            <span className="mt-4 inline-block text-orange-60 font-semibold text-sm border-b border-orange-40 pb-0.5">
+              LinkedIn ↗
+            </span>
+          </a>
+
+          <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            className="w-full max-w-sm lg:max-w-none lg:flex-1 flex flex-col gap-4 bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p hidden>
+              <label>
+                Don't fill this out:{" "}
+                <input name="bot-field" tabIndex="-1" autoComplete="off" />
+              </label>
+            </p>
+
+            <h3 className="font-display font-semibold text-ink-900">
+              Or send a message
+            </h3>
+
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-ink-700"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="rounded-xl border border-outline bg-surface px-4 py-2.5 text-ink-900 focus:outline-none focus:ring-2 focus:ring-orange-50"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium text-ink-700"
+              >
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="rounded-xl border border-outline bg-surface px-4 py-2.5 text-ink-900 focus:outline-none focus:ring-2 focus:ring-orange-50"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="message"
+                className="text-sm font-medium text-ink-700"
+              >
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                value={formData.message}
+                onChange={handleChange}
+                className="rounded-xl border border-outline bg-surface px-4 py-2.5 text-ink-900 focus:outline-none focus:ring-2 focus:ring-orange-50 resize-none"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={formStatus === "submitting"}
+              className="mt-1 rounded-full bg-navy-20 text-white font-semibold text-sm px-6 py-3 shadow-e1 hover:bg-navy-30 transition disabled:opacity-60"
+            >
+              {formStatus === "submitting" ? "Sending…" : "Send message"}
+            </button>
+          </form>
+        </div>
 
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-3 w-full max-w-sm bg-surface-container rounded-full pl-4 pr-5 py-3 border border-outline shadow-e1 hover:bg-surface-container-high transition"
+          className="flex items-center gap-3 w-full max-w-sm lg:max-w-[49rem] bg-surface-container rounded-full pl-4 pr-5 py-3 border border-outline shadow-e1 hover:bg-surface-container-high transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +212,7 @@ const Contact = () => {
             : "opacity-0 translate-y-2 pointer-events-none")
         }
       >
-        {showSnackbar && "Email copied to clipboard"}
+        {showSnackbar && snackbarMessage}
       </div>
     </div>
   )

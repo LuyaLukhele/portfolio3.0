@@ -2,22 +2,19 @@ import Me from "../assets/LuyandaShirtPP.avif"
 
 const Home = ({ onNavigate }) => {
   return (
-    <div className="flex flex-col-reverse lg:flex-row lg:items-center gap-10 lg:gap-14 py-10">
-      <div>
+    <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-14 py-10">
+      <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
         <h1 className="font-display font-semibold tracking-tight text-4xl lg:text-5xl text-ink-900">
-          I build software across the stack
+          Software Engineer
           <span className="text-orange-50">.</span>
         </h1>
-        <span className="mt-3 block font-mono text-orange-40 text-sm">
-          Software Engineer
-        </span>
         <p className="mt-4 max-w-md text-ink-700 leading-relaxed">
           I design and maintain web applications across the{" "}
           <span className="text-orange-50 font-semibold">front-end</span>,{" "}
           <span className="text-orange-50 font-semibold">back-end</span>,
           APIs, and the databases that hold it together.
         </p>
-        <div className="mt-7 flex flex-wrap gap-3">
+        <div className="mt-7 flex flex-wrap justify-center lg:justify-start gap-3">
           <button
             type="button"
             onClick={() => onNavigate(3)}
@@ -35,7 +32,7 @@ const Home = ({ onNavigate }) => {
         </div>
       </div>
 
-      <div className="relative isolate mx-auto lg:mx-0 shrink-0 w-fit">
+      <div className="relative isolate shrink-0 w-fit">
         <div className="absolute inset-0 translate-x-6 translate-y-6 bg-orange-50 rounded-[28px_28px_28px_8px] -z-10" />
         <img
           alt="Luyanda Lukhele"
