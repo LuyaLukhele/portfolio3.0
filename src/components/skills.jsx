@@ -1,6 +1,6 @@
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
-const skillGroups = [
+export const skillGroups = [
   {
     title: "Languages",
     skills: [
