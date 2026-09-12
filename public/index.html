@@ -75,16 +75,6 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
-      Static form so Netlify's build-time bot can detect and provision
-      the "contact" form. The real form rendered by React (src/components/contact.jsx)
-      submits to it via fetch. See https://docs.netlify.com/manage/forms/setup/
-    -->
-    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <textarea name="message"></textarea>
-    </form>
-    <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 

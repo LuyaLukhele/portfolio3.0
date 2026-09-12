@@ -4,11 +4,6 @@ import { copyToClipboard } from "../utils/clipboard"
 
 const EMAIL = "lukheleluyanda@gmail.com"
 
-const encodeForm = (data) =>
-  Object.keys(data)
-    .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
-    .join("&")
-
 const Contact = () => {
   const [copyState, setCopyState] = useState("tap to copy")
   const [showSnackbar, setShowSnackbar] = useState(false)
@@ -37,11 +32,15 @@ const Contact = () => {
     e.preventDefault()
     setFormStatus("submitting")
     try {
-      await fetch("/", {
+      const res = await fetch("/.netlify/functions/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encodeForm({ "form-name": "contact", ...formData }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          "bot-field": e.target["bot-field"].value,
+        }),
       })
+      if (!res.ok) throw new Error("Request failed")
       setFormStatus("success")
       setFormData({ name: "", email: "", message: "" })
       showToast("Message sent — thanks for reaching out")
@@ -85,13 +84,9 @@ const Contact = () => {
 
           <form
             name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="w-full max-w-sm lg:max-w-none lg:flex-1 flex flex-col gap-4 bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6"
           >
-            <input type="hidden" name="form-name" value="contact" />
             <p hidden>
               <label>
                 Don't fill this out:{" "}
