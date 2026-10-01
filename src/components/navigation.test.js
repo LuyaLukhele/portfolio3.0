@@ -32,13 +32,12 @@ test("marks the active rail item with aria-current", () => {
   expect(homeButtons[0]).not.toHaveAttribute("aria-current")
 })
 
-test("top bar border toggles on scroll", () => {
+test("top bar stays plain and scrolls with the page", () => {
   render(<Nav />)
   const header = screen.getByTestId("section-header")
-  expect(header.className).not.toMatch(/border-outline\b/)
   window.scrollY = 10
   fireEvent.scroll(window)
-  expect(header.className).toMatch(/border-outline\b/)
+  expect(header.className).not.toMatch(/sticky|border|bg-/)
 })
 
 test("copy-email icon in the top bar copies the real address and shows a toast", async () => {
