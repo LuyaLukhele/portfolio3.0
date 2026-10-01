@@ -247,7 +247,7 @@ html[data-nav-dir="back"]::view-transition-new(page) {
     transparent 1px
   );
   background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse at center, black 20%, transparent 85%);
 }
 
 /* Skills logo marquee */

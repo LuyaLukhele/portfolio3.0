@@ -34,19 +34,7 @@ const Home = ({ onNavigate }) => {
   }
 
   return (
-    <div className="relative isolate flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-14 py-10">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="dot-grid absolute inset-0 opacity-60" />
-        <div className="blob absolute -top-10 right-0 h-64 w-64 rounded-full bg-orange-60/30 blur-3xl" />
-        <div
-          className="blob absolute bottom-0 left-0 h-56 w-56 rounded-full bg-navy-40/20 blur-3xl"
-          style={{ animationDelay: "-9s" }}
-        />
-      </div>
-
+    <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-14 py-10">
       <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
         <h1
           aria-label="Software Engineer"

@@ -82,6 +82,27 @@ function useSlidingIndicator(open) {
   return [(id) => (el) => (itemRefs.current[id] = el), pill]
 }
 
+// Fixed behind every page; the isolate wrapper keeps it above the page bg.
+function AmbientBackground() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
+      <div className="dot-grid absolute inset-0 opacity-60" />
+      <div className="blob absolute -top-24 -right-24 h-[28rem] w-[28rem] rounded-full bg-orange-60/25 blur-[100px]" />
+      <div
+        className="blob absolute -bottom-32 left-[10%] h-[26rem] w-[26rem] rounded-full bg-navy-40/15 blur-[100px]"
+        style={{ animationDelay: "-9s" }}
+      />
+      <div
+        className="blob absolute top-1/3 left-1/2 h-72 w-72 rounded-full bg-orange-90/40 blur-[80px]"
+        style={{ animationDelay: "-5s", animationDuration: "24s" }}
+      />
+    </div>
+  )
+}
+
 function Nav() {
   const [open, setOpen] = useState(0)
   const [direction, setDirection] = useState(null)
@@ -134,7 +155,8 @@ function Nav() {
       : "text-ink-500 hover:bg-surface-container-high")
 
   return (
-    <div className="lg:grid lg:grid-cols-[88px_1fr] min-h-screen bg-surface font-body">
+    <div className="relative isolate lg:grid lg:grid-cols-[88px_1fr] min-h-screen bg-surface font-body">
+      <AmbientBackground />
       <nav
         aria-label="Primary"
         className="hidden lg:flex lg:flex-col lg:items-center lg:sticky lg:top-0 lg:h-screen bg-surface-container border-r border-outline py-7 gap-1.5"
@@ -166,8 +188,10 @@ function Nav() {
         <header
           data-testid="section-header"
           className={
-            "flex items-center justify-between px-5 lg:px-10 py-4 sticky top-0 z-10 bg-surface/90 backdrop-blur-sm border-b transition-colors " +
-            (scrolled ? "border-outline" : "border-transparent")
+            "flex items-center justify-between px-5 lg:px-10 py-4 sticky top-0 z-10 border-b transition-colors " +
+            (scrolled
+              ? "border-outline bg-surface/70 backdrop-blur-md"
+              : "border-transparent")
           }
         >
           <span className="font-mono text-[13px] text-ink-500 tracking-wide">

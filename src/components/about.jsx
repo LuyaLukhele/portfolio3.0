@@ -5,7 +5,7 @@ import { stagger, useCountUp } from "../utils/motion"
 const allSkills = skillGroups.flatMap((group) => group.skills)
 
 const stats = [
-  { label: "Technologies", value: allSkills.length },
+  { label: "Skills", value: allSkills.length },
   {
     label: "Languages",
     value: skillGroups.find((g) => g.title === "Languages").skills.length,
@@ -18,13 +18,13 @@ function Stat({ label, value, index }) {
   return (
     <div
       ref={ref}
-      className="stagger bg-surface-container border border-outline rounded-[20px] shadow-e1 px-5 py-4"
+      className="stagger bg-surface-container border border-outline rounded-[20px] shadow-e1 px-4 sm:px-5 py-4"
       style={stagger(index)}
     >
       <div className="font-display text-3xl font-semibold text-ink-900 tabular-nums">
         {count}
       </div>
-      <div className="mt-1 text-xs font-semibold uppercase tracking-wide text-ink-500">
+      <div className="mt-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-ink-500">
         {label}
       </div>
     </div>
