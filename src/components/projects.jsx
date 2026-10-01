@@ -1,10 +1,13 @@
 import { useState, useRef, useLayoutEffect } from "react"
+import { stagger } from "../utils/motion"
+import PixelSharpPP from "../assets/pixelsharp.avif"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
 export const techLogos = {
+  React: logo("reactjs"),
   JavaScript: logo("javascript"),
   JQuery: logo("jquery"),
   HTML: logo("html5"),
@@ -80,6 +83,18 @@ function TechBadge({ name }) {
 
 export const projects = [
   {
+    title: "Pixel Sharp",
+    description:
+      "A site for a website-facelift studio. Its hero dissolves a dated, pixelated page tile by tile into the sharp redesign underneath.",
+    image: PixelSharpPP,
+    imageAlt: "Pixel Sharp live site",
+    // Keep the headline in frame when narrow cards crop the wide image
+    imagePosition: "object-left",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    linkLabel: "Live site",
+    linkUrl: "https://pixelsharp.co.za/",
+  },
+  {
     title: "Now Movies",
     description: "Discover current movies and TV shows and their ratings.",
     image: MoviePP,
@@ -105,15 +120,25 @@ function ProjectCard({
   description,
   image,
   imageAlt,
+  imagePosition = "object-center",
   tech,
   linkLabel,
   linkUrl,
+  index,
 }) {
   return (
-    <article className="group bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6 transition-shadow duration-300 [@media(hover:hover)]:hover:shadow-e2">
-      <a href={linkUrl} target="_blank" rel="noreferrer" className="block overflow-hidden">
+    <article
+      className="stagger group bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6 transition duration-300 [@media(hover:hover)]:hover:shadow-e3 [@media(hover:hover)]:hover:-translate-y-1"
+      style={stagger(index)}
+    >
+      <a
+        href={linkUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="block overflow-hidden"
+      >
         <ProjectImage
-          className="w-full h-48 object-cover transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105"
+          className={`w-full h-48 object-cover ${imagePosition} transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105`}
           src={image}
           alt={imageAlt}
         />
@@ -134,9 +159,15 @@ function ProjectCard({
           href={linkUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-outline-strong hover:bg-surface-container-high transition"
+          className="group/link mt-5 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-outline-strong hover:bg-surface-container-high transition"
         >
           {linkLabel}
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+          >
+            ↗
+          </span>
         </a>
       </div>
     </article>
@@ -148,11 +179,11 @@ function Projects() {
     <div className="py-10">
       <div className="pb-6">
         <h2 className="font-display text-2xl font-semibold text-ink-900">
-          A couple of things I've shipped
+          A few things I've shipped
         </h2>
       </div>
-      {projects.map((project) => (
-        <ProjectCard key={project.title} {...project} />
+      {projects.map((project, i) => (
+        <ProjectCard key={project.title} index={i} {...project} />
       ))}
     </div>
   )

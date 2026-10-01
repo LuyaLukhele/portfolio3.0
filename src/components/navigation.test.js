@@ -20,7 +20,7 @@ test("switches section and title when a rail item is clicked", () => {
   fireEvent.click(projectsButton)
   // Both the header and the section component display "// projects"
   // Check for the section-specific title that only appears in Projects
-  expect(screen.getByText("A couple of things I've shipped")).toBeInTheDocument()
+  expect(screen.getByText("A few things I've shipped")).toBeInTheDocument()
 })
 
 test("marks the active rail item with aria-current", () => {

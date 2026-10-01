@@ -1,3 +1,36 @@
+import { skillGroups } from "./skills"
+import { projects } from "./projects"
+import { stagger, useCountUp } from "../utils/motion"
+
+const allSkills = skillGroups.flatMap((group) => group.skills)
+
+const stats = [
+  { label: "Skills", value: allSkills.length },
+  {
+    label: "Languages",
+    value: skillGroups.find((g) => g.title === "Languages").skills.length,
+  },
+  { label: "Live projects", value: projects.length },
+]
+
+function Stat({ label, value, index }) {
+  const [ref, count] = useCountUp(value)
+  return (
+    <div
+      ref={ref}
+      className="stagger bg-surface-container border border-outline rounded-[20px] shadow-e1 px-4 sm:px-5 py-4"
+      style={stagger(index)}
+    >
+      <div className="font-display text-3xl font-semibold text-ink-900 tabular-nums">
+        {count}
+      </div>
+      <div className="mt-1 text-[10px] sm:text-xs font-semibold uppercase tracking-wide text-ink-500">
+        {label}
+      </div>
+    </div>
+  )
+}
+
 const cards = [
   {
     title: "Back-End",
@@ -70,16 +103,23 @@ const cards = [
 const About = ({ onNavigate }) => {
   return (
     <div className="py-10">
+      <div className="grid grid-cols-3 gap-3 sm:gap-5 mb-5">
+        {stats.map((stat, i) => (
+          <Stat key={stat.label} index={i} {...stat} />
+        ))}
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        {cards.map(({ title, description, icon, fullWidth }) => (
+        {cards.map(({ title, description, icon, fullWidth }, i) => (
           <div
             key={title}
+            style={stagger(i + stats.length)}
             className={
-              "bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6 transition-shadow duration-300 [@media(hover:hover)]:hover:shadow-e2" +
+              "stagger group bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6 transition duration-300 [@media(hover:hover)]:hover:shadow-e3 [@media(hover:hover)]:hover:-translate-y-1" +
               (fullWidth ? " sm:col-span-2" : "")
             }
           >
-            <div className="h-11 w-11 rounded-md flex items-center justify-center bg-orange-50">
+            <div className="h-11 w-11 rounded-md flex items-center justify-center bg-orange-50 transition-transform duration-300 [@media(hover:hover)]:group-hover:-rotate-6 [@media(hover:hover)]:group-hover:scale-110">
               {icon}
             </div>
             <h3 className="mt-4 font-display text-lg font-semibold text-ink-900">
@@ -90,7 +130,10 @@ const About = ({ onNavigate }) => {
         ))}
       </div>
 
-      <div className="mt-5 rounded-[20px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-navy-20 py-6 px-6">
+      <div
+        className="stagger mt-5 rounded-[20px] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 bg-navy-20 py-6 px-6"
+        style={stagger(cards.length + stats.length)}
+      >
         <div>
           <h3 className="text-white font-display font-semibold text-lg">
             Open to new opportunities
