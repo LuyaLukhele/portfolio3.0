@@ -11,8 +11,17 @@ body {
 
 body {
   font-family:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -45,8 +54,267 @@ code {
   animation: page-fade-in 0.35s ease-out;
 }
 
+/* Directional page change (fallback when View Transitions are unavailable) */
+@keyframes page-in-forward {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+
+@keyframes page-in-back {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+@keyframes page-out-forward {
+  to {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+@keyframes page-out-back {
+  to {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+
+.page-transition[data-dir="forward"] {
+  animation: page-in-forward 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-transition[data-dir="back"] {
+  animation: page-in-back 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.page-transition[data-dir="vt"] {
+  animation: none;
+}
+
+/* View Transitions: only the page content slides; the chrome stays live */
+.page-region {
+  view-transition-name: page;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(page) {
+  animation: page-fade-out 0.2s ease-in both;
+}
+
+::view-transition-new(page) {
+  animation: page-fade-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-nav-dir="forward"]::view-transition-old(page) {
+  animation-name: page-out-forward;
+}
+
+html[data-nav-dir="forward"]::view-transition-new(page) {
+  animation-name: page-in-forward;
+}
+
+html[data-nav-dir="back"]::view-transition-old(page) {
+  animation-name: page-out-back;
+}
+
+html[data-nav-dir="back"]::view-transition-new(page) {
+  animation-name: page-in-back;
+}
+
+@keyframes page-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Staggered entrances: set --i per item. Fill "backwards" so the
+   animation releases transform afterwards and hover lifts still work. */
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+.stagger {
+  animation: rise-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 55ms + 60ms);
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  70% {
+    transform: scale(1.04);
+  }
+}
+
+.pop {
+  animation: pop-in 0.4s ease-out backwards;
+  animation-delay: calc(var(--i, 0) * 35ms + 120ms);
+}
+
+/* Header breadcrumb typing out */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  width: calc(var(--chars) * (1ch + 0.025em));
+  animation: typing calc(var(--chars) * 45ms) steps(var(--chars)) 0.1s backwards;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blink {
+  animation: blink 1.1s steps(1) infinite;
+}
+
+/* Hero: offset block slides out from behind the photo */
+@keyframes hero-offset {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(1.5rem, 1.5rem);
+  }
+}
+
+.hero-offset {
+  animation: hero-offset 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.tilt {
+  transform: perspective(800px) rotateX(var(--rx, 0deg))
+    rotateY(var(--ry, 0deg));
+  transition: transform 0.4s ease-out;
+}
+
+/* Rotating headline word */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+    filter: blur(4px);
+  }
+}
+
+.word-in {
+  display: inline-block;
+  animation: word-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Ambient hero background */
+@keyframes drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.1);
+  }
+  100% {
+    transform: translate(-20px, 25px) scale(0.95);
+  }
+}
+
+.blob {
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+.dot-grid {
+  background-image: radial-gradient(
+    theme("colors.outline.strong") 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+}
+
+/* Skills logo marquee */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee {
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 12%,
+    black 88%,
+    transparent
+  );
+}
+
+/* Contact form feedback */
+@keyframes shake {
+  20%,
+  60% {
+    transform: translateX(-6px);
+  }
+  40%,
+  80% {
+    transform: translateX(6px);
+  }
+}
+
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: var(--len, 24);
+  }
+}
+
+.draw {
+  stroke-dasharray: var(--len, 24);
+  animation: draw 0.4s ease-out 0.05s backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .page-transition {
-    animation: none;
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }

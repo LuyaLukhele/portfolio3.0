@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { flushSync } from "react-dom"
 import Contact from "./contact"
 import About from "./about"
 import Projects from "./projects"
 import Skills from "./skills"
 import Home from "./home"
 import { copyToClipboard } from "../utils/clipboard"
+import { prefersReducedMotion } from "../utils/motion"
 
 const EMAIL = "lukheleluyanda@gmail.com"
 const LINKEDIN_URL = "https://www.linkedin.com/in/luyalukhele/"
@@ -43,8 +45,49 @@ const links = [
   },
 ]
 
+// Measures the active item so a single pill can slide between items.
+function useSlidingIndicator(open) {
+  const itemRefs = useRef({})
+  const hasMeasured = useRef(false)
+  const [pos, setPos] = useState(null)
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = itemRefs.current[open]
+      if (el) setPos({ x: el.offsetLeft, y: el.offsetTop })
+    }
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [open])
+
+  useEffect(() => {
+    if (pos) hasMeasured.current = true
+  }, [pos])
+
+  const pill = pos && (
+    <span
+      aria-hidden="true"
+      data-testid="nav-indicator"
+      className="absolute left-0 top-0 w-11 h-7 rounded-[14px] bg-orange-90 pointer-events-none"
+      style={{
+        transform: `translate(${pos.x}px, ${pos.y}px)`,
+        transition: hasMeasured.current
+          ? "transform 380ms cubic-bezier(0.34, 1.4, 0.64, 1)"
+          : "none",
+      }}
+    />
+  )
+
+  return [(id) => (el) => (itemRefs.current[id] = el), pill]
+}
+
 function Nav() {
   const [open, setOpen] = useState(0)
+  const [direction, setDirection] = useState(null)
+  const [emailCopied, setEmailCopied] = useState(false)
+  const [railRef, railPill] = useSlidingIndicator(open)
+  const [barRef, barPill] = useSlidingIndicator(open)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -56,21 +99,38 @@ function Nav() {
   const [showToast, setShowToast] = useState(false)
 
   function navigate(id) {
+    if (id === open) return
+    const dir = id > open ? "forward" : "back"
+
+    if (!prefersReducedMotion() && document.startViewTransition) {
+      document.documentElement.dataset.navDir = dir
+      document.startViewTransition(() =>
+        flushSync(() => {
+          setDirection("vt")
+          setOpen(id)
+        })
+      )
+      return
+    }
+
+    setDirection(prefersReducedMotion() ? null : dir)
     setOpen(id)
   }
 
   function handleCopyEmail() {
     copyToClipboard(EMAIL)
     setShowToast(true)
+    setEmailCopied(true)
     setTimeout(() => setShowToast(false), 2200)
+    setTimeout(() => setEmailCopied(false), 1500)
   }
 
   const active = links.find((l) => l.id === open)
 
   const indicatorClasses = (id) =>
-    "flex items-center justify-center w-11 h-7 rounded-[14px] transition-colors duration-150 " +
+    "relative flex items-center justify-center w-11 h-7 rounded-[14px] transition-colors duration-150 " +
     (id === open
-      ? "bg-orange-90 text-orange-40"
+      ? "text-orange-40"
       : "text-ink-500 hover:bg-surface-container-high")
 
   return (
@@ -79,6 +139,7 @@ function Nav() {
         aria-label="Primary"
         className="hidden lg:flex lg:flex-col lg:items-center lg:sticky lg:top-0 lg:h-screen bg-surface-container border-r border-outline py-7 gap-1.5"
       >
+        {railPill}
         <div className="w-10 h-10 rounded-xl bg-navy-20 text-orange-60 flex items-center justify-center font-mono text-[13px] font-medium mb-7">
           LL
         </div>
@@ -93,7 +154,9 @@ function Nav() {
             }
             onClick={() => navigate(id)}
           >
-            <span className={indicatorClasses(id)}>{icon}</span>
+            <span ref={railRef(id)} className={indicatorClasses(id)}>
+              {icon}
+            </span>
             {link}
           </button>
         ))}
@@ -108,7 +171,17 @@ function Nav() {
           }
         >
           <span className="font-mono text-[13px] text-ink-500 tracking-wide">
-            {`// ${active.link.toLowerCase()}`}
+            <span
+              key={open}
+              className="typing"
+              style={{ "--chars": `// ${active.link}`.length }}
+            >
+              {`// ${active.link.toLowerCase()}`}
+            </span>
+            <span
+              aria-hidden="true"
+              className="blink inline-block ml-0.5 w-[7px] h-[14px] align-middle bg-orange-50"
+            />
           </span>
           <div className="flex gap-2">
             <a
@@ -135,7 +208,21 @@ function Nav() {
               onClick={handleCopyEmail}
               className="w-10 h-10 rounded-xl flex items-center justify-center bg-surface-container border border-outline text-ink-700 hover:bg-surface-container-high"
             >
-              {mailIcon()}
+              <span className="relative w-5 h-5">
+                <span
+                  className={
+                    "absolute inset-0 transition duration-200 " +
+                    (emailCopied ? "opacity-0 scale-50" : "opacity-100")
+                  }
+                >
+                  {mailIcon()}
+                </span>
+                {emailCopied && (
+                  <span className="absolute inset-0 text-orange-50">
+                    {checkIcon()}
+                  </span>
+                )}
+              </span>
             </button>
           </div>
         </header>
@@ -145,7 +232,7 @@ function Nav() {
           aria-live="polite"
           data-testid="email-toast"
           className={
-            "fixed top-20 right-5 lg:top-6 lg:right-10 z-50 bg-navy-10 text-white text-sm font-body px-4 py-3 rounded-xl shadow-e3 transition-all duration-200 " +
+            "fixed top-20 right-5 lg:right-10 z-50 bg-navy-10 text-white text-sm font-body px-4 py-3 rounded-xl shadow-e3 transition-all duration-200 " +
             (showToast
               ? "opacity-100 translate-y-0"
               : "opacity-0 -translate-y-2 pointer-events-none")
@@ -155,7 +242,11 @@ function Nav() {
         </div>
 
         <main className="flex-1 px-5 lg:px-10 pb-24 lg:pb-10 w-full max-w-3xl mx-auto">
-          <div key={open} className="page-transition">
+          <div
+            key={open}
+            data-dir={direction ?? undefined}
+            className="page-transition page-region"
+          >
             {active.place(navigate)}
           </div>
         </main>
@@ -165,9 +256,11 @@ function Nav() {
         aria-label="Primary (mobile)"
         className="lg:hidden fixed bottom-0 left-0 right-0 flex justify-between px-3 py-2 bg-surface-container border-t border-outline z-10"
       >
+        {barPill}
         {links.map(({ id, link, icon }) => (
           <button
             key={id}
+            ref={barRef(id)}
             type="button"
             aria-label={link}
             aria-current={id === open ? "page" : undefined}
@@ -328,6 +421,27 @@ function mailIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+      />
+    </svg>
+  )
+}
+
+function checkIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      className="w-5 h-5"
+    >
+      <path
+        className="draw"
+        style={{ "--len": 26 }}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M4.5 12.75l6 6 9-13.5"
       />
     </svg>
   )

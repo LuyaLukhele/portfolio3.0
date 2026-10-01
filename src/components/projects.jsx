@@ -1,4 +1,5 @@
 import { useState, useRef, useLayoutEffect } from "react"
+import { stagger } from "../utils/motion"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 
@@ -108,10 +109,19 @@ function ProjectCard({
   tech,
   linkLabel,
   linkUrl,
+  index,
 }) {
   return (
-    <article className="group bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6 transition-shadow duration-300 [@media(hover:hover)]:hover:shadow-e2">
-      <a href={linkUrl} target="_blank" rel="noreferrer" className="block overflow-hidden">
+    <article
+      className="stagger group bg-surface-container border border-outline rounded-[24px] shadow-e1 overflow-hidden mb-6 transition duration-300 [@media(hover:hover)]:hover:shadow-e3 [@media(hover:hover)]:hover:-translate-y-1"
+      style={stagger(index)}
+    >
+      <a
+        href={linkUrl}
+        target="_blank"
+        rel="noreferrer"
+        className="block overflow-hidden"
+      >
         <ProjectImage
           className="w-full h-48 object-cover transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105"
           src={image}
@@ -134,9 +144,15 @@ function ProjectCard({
           href={linkUrl}
           target="_blank"
           rel="noreferrer"
-          className="mt-5 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-outline-strong hover:bg-surface-container-high transition"
+          className="group/link mt-5 inline-flex items-center gap-2 text-sm font-semibold px-4 py-2 rounded-full border border-outline-strong hover:bg-surface-container-high transition"
         >
           {linkLabel}
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+          >
+            ↗
+          </span>
         </a>
       </div>
     </article>
@@ -151,8 +167,8 @@ function Projects() {
           A couple of things I've shipped
         </h2>
       </div>
-      {projects.map((project) => (
-        <ProjectCard key={project.title} {...project} />
+      {projects.map((project, i) => (
+        <ProjectCard key={project.title} index={i} {...project} />
       ))}
     </div>
   )

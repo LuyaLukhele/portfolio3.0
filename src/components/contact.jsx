@@ -1,6 +1,7 @@
 import { useState } from "react"
 import myImage from "../assets/LuyandaShirtPP.avif"
 import { copyToClipboard } from "../utils/clipboard"
+import { stagger } from "../utils/motion"
 
 const EMAIL = "lukheleluyanda@gmail.com"
 
@@ -10,6 +11,7 @@ const Contact = () => {
   const [snackbarMessage, setSnackbarMessage] = useState("")
   const [formData, setFormData] = useState({ name: "", email: "", message: "" })
   const [formStatus, setFormStatus] = useState("idle")
+  const [errorCount, setErrorCount] = useState(0)
 
   const showToast = (message) => {
     setSnackbarMessage(message)
@@ -26,6 +28,8 @@ const Contact = () => {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+    if (formStatus === "success" || formStatus === "error")
+      setFormStatus("idle")
   }
 
   const handleSubmit = async (e) => {
@@ -37,7 +41,7 @@ const Contact = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
-          "bot-field": e.target["bot-field"].value,
+          "bot-field": e.target.elements["bot-field"].value,
         }),
       })
       if (!res.ok) throw new Error("Request failed")
@@ -46,6 +50,7 @@ const Contact = () => {
       showToast("Message sent — thanks for reaching out")
     } catch {
       setFormStatus("error")
+      setErrorCount((n) => n + 1)
       showToast("Something went wrong, please try again")
     }
   }
@@ -64,7 +69,8 @@ const Contact = () => {
             href="https://www.linkedin.com/in/luyalukhele/"
             target="_blank"
             rel="noreferrer"
-            className="block w-full max-w-sm lg:max-w-none lg:flex-1 rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,theme(colors.navy.20),theme(colors.navy.10))] transform hover:scale-[1.02] transition duration-300"
+            style={stagger(0)}
+            className="stagger block w-full max-w-sm lg:max-w-none lg:flex-1 rounded-[28px] p-8 shadow-e3 text-white bg-[linear-gradient(160deg,theme(colors.navy.20),theme(colors.navy.10))] transform hover:scale-[1.02] transition duration-300"
           >
             <img
               src={myImage}
@@ -84,8 +90,10 @@ const Contact = () => {
 
           <form
             name="contact"
+            aria-label="Contact form"
             onSubmit={handleSubmit}
-            className="w-full max-w-sm lg:max-w-none lg:flex-1 flex flex-col gap-4 bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6"
+            style={stagger(1)}
+            className="stagger w-full max-w-sm lg:max-w-none lg:flex-1 flex flex-col gap-4 bg-surface-container border border-outline rounded-[20px] shadow-e1 p-6"
           >
             <p hidden>
               <label>
@@ -153,11 +161,47 @@ const Contact = () => {
             </div>
 
             <button
+              key={errorCount}
               type="submit"
               disabled={formStatus === "submitting"}
-              className="mt-1 rounded-full bg-navy-20 text-white font-semibold text-sm px-6 py-3 shadow-e1 hover:bg-navy-30 transition disabled:opacity-60"
+              className={
+                "mt-1 inline-flex items-center justify-center gap-2 rounded-full text-white font-semibold text-sm px-6 py-3 shadow-e1 transition-colors duration-300 disabled:opacity-80 " +
+                (formStatus === "success"
+                  ? "bg-orange-40"
+                  : "bg-navy-20 hover:bg-navy-30") +
+                (formStatus === "error" ? " shake" : "")
+              }
             >
-              {formStatus === "submitting" ? "Sending…" : "Send message"}
+              {formStatus === "submitting" && (
+                <span
+                  aria-hidden="true"
+                  className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin"
+                />
+              )}
+              {formStatus === "success" && (
+                <svg
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2.5}
+                  stroke="currentColor"
+                  className="h-4 w-4"
+                >
+                  <path
+                    className="draw"
+                    style={{ "--len": 26 }}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                  />
+                </svg>
+              )}
+              {formStatus === "submitting"
+                ? "Sending…"
+                : formStatus === "success"
+                  ? "Message sent"
+                  : "Send message"}
             </button>
           </form>
         </div>
@@ -165,7 +209,8 @@ const Contact = () => {
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-3 w-full max-w-sm lg:max-w-[49rem] bg-surface-container rounded-full pl-4 pr-5 py-3 border border-outline shadow-e1 hover:bg-surface-container-high transition"
+          style={stagger(2)}
+          className="stagger flex items-center gap-3 w-full max-w-sm lg:max-w-[49rem] bg-surface-container rounded-full pl-4 pr-5 py-3 border border-outline shadow-e1 hover:bg-surface-container-high transition"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
