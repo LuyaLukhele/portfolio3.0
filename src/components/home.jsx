@@ -1,22 +1,11 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import Me from "../assets/LuyandaShirtPP.avif"
 import { prefersReducedMotion, stagger } from "../utils/motion"
 
-const ROLES = ["Software Engineer", "Back-End Developer", "Front-End Developer"]
 const MAX_TILT = 6
 
 const Home = ({ onNavigate }) => {
-  const [roleIndex, setRoleIndex] = useState(0)
   const tiltRef = useRef(null)
-
-  useEffect(() => {
-    if (prefersReducedMotion()) return
-    const id = setInterval(
-      () => setRoleIndex((i) => (i + 1) % ROLES.length),
-      3200
-    )
-    return () => clearInterval(id)
-  }, [])
 
   function handlePointerMove(e) {
     if (e.pointerType !== "mouse" || prefersReducedMotion()) return
@@ -36,13 +25,8 @@ const Home = ({ onNavigate }) => {
   return (
     <div className="flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-14 py-10">
       <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-        <h1
-          aria-label="Software Engineer"
-          className="font-display font-semibold tracking-tight text-4xl lg:text-5xl text-ink-900"
-        >
-          <span key={roleIndex} className="word-in" aria-hidden="true">
-            {ROLES[roleIndex]}
-          </span>
+        <h1 className="font-display font-semibold tracking-tight text-4xl lg:text-5xl text-ink-900">
+          Software Engineer
           <span className="blink text-orange-50" aria-hidden="true">
             .
           </span>
