@@ -1,6 +1,7 @@
 import { useState, useRef, useLayoutEffect } from "react"
 import { stagger } from "../utils/motion"
 import PixelSharpPP from "../assets/pixelsharp.avif"
+import PixelSharpMobilePP from "../assets/pixelsharp-mobile.avif"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 
@@ -17,7 +18,9 @@ export const techLogos = {
 
 const loadedImageSrcs = new Set()
 
-function ProjectImage({ src, alt, className }) {
+// Phones get a taller crop when one is provided; the wide card on larger
+// screens uses the main image.
+function ProjectImage({ src, mobileSrc, alt, className }) {
   const [loaded, setLoaded] = useState(loadedImageSrcs.has(src))
   const imgRef = useRef(null)
 
@@ -36,20 +39,23 @@ function ProjectImage({ src, alt, className }) {
           (loaded ? " opacity-0" : " opacity-100 animate-pulse")
         }
       />
-      <img
-        ref={imgRef}
-        src={src}
-        alt={alt}
-        className={
-          className +
-          " transition-opacity duration-500 ease-out" +
-          (loaded ? " opacity-100" : " opacity-0")
-        }
-        onLoad={() => {
-          loadedImageSrcs.add(src)
-          setLoaded(true)
-        }}
-      />
+      <picture className="block">
+        {mobileSrc && <source media="(min-width: 640px)" srcSet={src} />}
+        <img
+          ref={imgRef}
+          src={mobileSrc ?? src}
+          alt={alt}
+          className={
+            className +
+            " transition-opacity duration-500 ease-out" +
+            (loaded ? " opacity-100" : " opacity-0")
+          }
+          onLoad={() => {
+            loadedImageSrcs.add(src)
+            setLoaded(true)
+          }}
+        />
+      </picture>
     </div>
   )
 }
@@ -88,8 +94,7 @@ export const projects = [
       "A site for a website-facelift studio. Its hero dissolves a dated, pixelated page tile by tile into the sharp redesign underneath.",
     image: PixelSharpPP,
     imageAlt: "Pixel Sharp live site",
-    // Keep the headline in frame when narrow cards crop the wide image
-    imagePosition: "object-left",
+    imageMobile: PixelSharpMobilePP,
     tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     linkLabel: "Live site",
     linkUrl: "https://pixelsharp.co.za/",
@@ -120,7 +125,7 @@ function ProjectCard({
   description,
   image,
   imageAlt,
-  imagePosition = "object-center",
+  imageMobile,
   tech,
   linkLabel,
   linkUrl,
@@ -138,8 +143,9 @@ function ProjectCard({
         className="block overflow-hidden"
       >
         <ProjectImage
-          className={`w-full h-48 object-cover ${imagePosition} transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105`}
+          className="w-full h-48 object-cover transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105"
           src={image}
+          mobileSrc={imageMobile}
           alt={imageAlt}
         />
       </a>

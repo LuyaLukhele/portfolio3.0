@@ -109,14 +109,6 @@ function Nav() {
   const [emailCopied, setEmailCopied] = useState(false)
   const [railRef, railPill] = useSlidingIndicator(open)
   const [barRef, barPill] = useSlidingIndicator(open)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 4)
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
   const [showToast, setShowToast] = useState(false)
 
   function navigate(id) {
@@ -187,12 +179,7 @@ function Nav() {
       <div className="flex flex-col min-h-screen">
         <header
           data-testid="section-header"
-          className={
-            "flex items-center justify-between px-5 lg:px-10 py-4 sticky top-0 z-10 border-b transition-colors " +
-            (scrolled
-              ? "border-outline bg-surface/70 backdrop-blur-md"
-              : "border-transparent")
-          }
+          className="flex items-center justify-between px-5 lg:px-10 py-4"
         >
           <span className="font-mono text-[13px] text-ink-500 tracking-wide">
             <span

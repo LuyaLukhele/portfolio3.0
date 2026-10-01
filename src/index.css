@@ -210,20 +210,6 @@ html[data-nav-dir="back"]::view-transition-new(page) {
   transition: transform 0.4s ease-out;
 }
 
-/* Rotating headline word */
-@keyframes word-in {
-  from {
-    opacity: 0;
-    transform: translateY(0.4em);
-    filter: blur(4px);
-  }
-}
-
-.word-in {
-  display: inline-block;
-  animation: word-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 /* Ambient hero background */
 @keyframes drift {
   0% {
