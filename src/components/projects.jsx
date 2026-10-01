@@ -1,11 +1,13 @@
 import { useState, useRef, useLayoutEffect } from "react"
 import { stagger } from "../utils/motion"
+import PixelSharpPP from "../assets/pixelsharp.avif"
 import MoviePP from "../assets/movie.avif"
 import Portfolio1PP from "../assets/portfolio1.avif"
 
 const logo = (name) => `${process.env.PUBLIC_URL}/logos/${name}.svg`
 
 export const techLogos = {
+  React: logo("reactjs"),
   JavaScript: logo("javascript"),
   JQuery: logo("jquery"),
   HTML: logo("html5"),
@@ -81,6 +83,18 @@ function TechBadge({ name }) {
 
 export const projects = [
   {
+    title: "Pixel Sharp",
+    description:
+      "A site for a website-facelift studio. Its hero dissolves a dated, pixelated page tile by tile into the sharp redesign underneath.",
+    image: PixelSharpPP,
+    imageAlt: "Pixel Sharp live site",
+    // Keep the headline in frame when narrow cards crop the wide image
+    imagePosition: "object-left",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    linkLabel: "Live site",
+    linkUrl: "https://pixelsharp.co.za/",
+  },
+  {
     title: "Now Movies",
     description: "Discover current movies and TV shows and their ratings.",
     image: MoviePP,
@@ -106,6 +120,7 @@ function ProjectCard({
   description,
   image,
   imageAlt,
+  imagePosition = "object-center",
   tech,
   linkLabel,
   linkUrl,
@@ -123,7 +138,7 @@ function ProjectCard({
         className="block overflow-hidden"
       >
         <ProjectImage
-          className="w-full h-48 object-cover transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105"
+          className={`w-full h-48 object-cover ${imagePosition} transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-105`}
           src={image}
           alt={imageAlt}
         />
@@ -164,7 +179,7 @@ function Projects() {
     <div className="py-10">
       <div className="pb-6">
         <h2 className="font-display text-2xl font-semibold text-ink-900">
-          A couple of things I've shipped
+          A few things I've shipped
         </h2>
       </div>
       {projects.map((project, i) => (
