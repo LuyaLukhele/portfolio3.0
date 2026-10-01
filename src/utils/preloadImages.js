@@ -4,7 +4,9 @@ import { skillGroups } from "../components/skills"
 
 export const preloadSrcs = [
   Me,
-  ...projects.map((project) => project.image),
+  ...projects.flatMap((project) =>
+    [project.image, project.imageMobile].filter(Boolean)
+  ),
   ...Object.values(techLogos),
   ...skillGroups.flatMap((group) => group.skills.map((skill) => skill.src)),
 ]
